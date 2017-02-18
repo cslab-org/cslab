@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+
+  <link rel="stylesheet" type="text/css" href="static/bootstrap.css"/>
+  <link rel="stylesheet" type="text/css" href="static/timer/heatmap.css">
+  <link rel="stylesheet" type="text/css" href="static/pikaday.css">
+
+  <script src="static/moment.js" charset="utf-8"></script>
+  <script src="static/d3.js" charset="utf-8"></script>
+  <script src="static/timer/heatmap.js"></script>
+
+
+  <title>PhD Timer</title>
+</head>
+
+<body>
+  <div class="navbar navbar-default">
+	<div class="container">	
+		<div class="navbar-header">
+			<a class="navbar-brand" href="/">
+			  <img alt="Brand" src="static/logo.png">
+			  CS_Lab
+			</a>	
+		</div>	
+
+		<div class="navbar-right" style="padding: 15px 0px;">
+		  <a href="{{logout_url}}">Logout</a> 
+		</div>
+	</div>
+  </div>
+  
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-2"> </div>
+
+      <div class="col-lg-8 col-md-10 col-sm-12">
+
+      	<div id="enclose-div">
+      	  <div class="col-sm-6 timer-div">
+      	    <a  title="Play video" class="play"></a>
+
+      	    <div id="started-div" class="dis-div"></div>
+      	    <div id="current-div" class="dis-div"></div>
+      	    
+      	  </div>
+
+      	  <div class="col-sm-6 timer-div">
+      	    
+      	  	<div id="prev-div" class="dis-div"></div>
+      	  	  
+      	  	  <div id="area-viewland" class="">
+	      	  	<div id="total-div" class="dis-div">
+	      	  		<!-- <div></div> <a href='javascript:;' id="total-edit" class="disabled">Edit</a> -->
+	      	  	</div>
+
+	      	  	<div id="date-div" class="dis-div">
+	      	  		
+	      	  	</div>
+
+	      	  	<div class="dis-div">
+	      	  	  <button id="total-edit-button">Edit</button>
+	      	  	  <!-- <button class="btn btn-success" id="commit-button" disabled="disabled">Commit</button> -->
+	      	  	</div>
+	      	  </div>
+
+	      	  <div id="area-editland" class="disabled">
+
+	      	    <div class="dis-div">
+		      	    Total Today:&nbsp;
+		      	    <select id="sel-hour">
+		      	      <option value="0">00</option>
+					  <option value="1">01</option>
+					  <option value="2">02</option>
+					  <option value="3">03</option>
+					  <option value="4">04</option>
+					  <option value="5">05</option>
+					  <option value="6">06</option>
+					  <option value="7">07</option>
+					  <option value="8">08</option>
+					  <option value="9">09</option>
+					  <option value="10">10</option>
+					  <option value="11">11</option>
+					  <option value="12">12</option>
+					  <option value="13">13</option>
+					  <option value="14">14</option>
+					  <option value="14">15</option>
+					  <option value="14">16</option>
+					</select>
+					h &nbsp;
+					<select id="sel-mins">
+					  <option value="0">00</option>
+					  <option value="5">05</option>
+					  <option value="10">10</option>
+					  <option value="15">15</option>
+					  <option value="20">20</option>
+					  <option value="25">25</option>
+					  <option value="30">30</option>
+					  <option value="35">35</option>
+					  <option value="40">40</option>
+					  <option value="45">45</option>
+					  <option value="50">50</option>
+					  <option value="55">55</option>
+					</select>
+					m
+
+					<div class="dis-div">
+						Date: &nbsp;<input type="text" id="datepicker">
+					</div>
+
+					<div class="dis-div">
+		      	  	  <!--<button class="btn-xs btn-success" id="commit-button" disabled="disabled">Commit</button> -->
+		      	  	  <button class="btn-xs btn-success" id="commit-button">Commit</button> 
+		      	  	</div>
+
+				</div>
+
+	      	  </div>
+	      	    	
+      	  </div>
+      	</div>
+
+	<!-- <div id="current-time" class="dis-div"></div> -->
+        <div id="year-total">
+          <button id="year-total-button"> &gt;&gt; </button>
+          <span class="hidden">215 hours in the last year</span>
+        </div>
+        
+        <div id="calendar-viz">
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="alert-bottom" class="alert alert-success fade">
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+
+    <div></div>
+
+  </div>
+
+<script src="static/pikaday.js"></script>
+</body>
+</html>
