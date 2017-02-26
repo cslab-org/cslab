@@ -59,6 +59,7 @@ class Handler(webapp2.RequestHandler):
 		try:
 			return (jinja_env.get_template(template)).render(params)
 		except:
+			# TODO - Be careful about blog/blog-error.html
 			return (jinja_env.get_template('blog/blog-error.html')).render()
 
 	def render(self, template, **html_add_ins):

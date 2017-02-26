@@ -1,0 +1,200 @@
+
+#paint {
+	width: 100%;
+	height: 4500px;
+	padding: 5px;
+}
+
+#sketch {
+	/*border: 1px solid #eee;*/
+	position: relative;
+	height: 100%;
+	width: 100%;
+	padding: 10px;
+}
+
+
+
+#tmp_canvas {
+	position: absolute;
+	left: 10px; 
+	top: 10px;
+	cursor: crosshair;
+	/* border: 1px solid rgba(100,100,100,0.5); */
+	z-index: 5; /* more preference than the alert-bottom, but less than the tool area */
+}
+
+#area1 {
+	position: fixed;
+	top: 20px;
+	width: 88px;
+	z-index: 10;
+	opacity: 1;
+	background-color: white;
+}
+
+#brow-icon {
+	margin-left: 2px;
+	margin-bottom: 5px;
+}
+
+#all-tools {
+	height: 620px;
+}
+
+#tool-panel {
+	padding: 0px 0px;
+	border-radius: 4px;
+}
+
+#tool-panel .btn-group {
+	margin: 0 auto;
+	display: block;
+	background-color: #fafafa;
+	overflow: auto;
+	padding: 0px 4px;
+}
+
+#tool-panel .btn-group > .btn {
+	float: none;
+	background-color: #fafafb;
+	padding: 8px 12px;
+}
+
+#tool-panel .btn-group {
+	display: inline-block;
+}
+
+
+
+#size-panel {
+	width: 80px;
+	display: inline-block;
+	margin-left: 7px;
+	margin-top: 12px;
+}
+
+#size-panel .title {
+	position: relative;
+	top: 10px;
+	left: -3px;
+	font-weight: bold;
+	color: rgba(100,100,100, 0.8);
+	font-style: italic;
+	font-size: 13px;
+	text-align: center;
+}
+
+#choose-size {
+	display: block;
+	position: relative;
+	top: 16px;
+}
+
+
+#size-panel .radio-group {
+	display: block;
+	width: 79px;
+	margin: 0 auto;
+}
+
+#size-panel .choose-radio {
+	display: inline-block;
+	padding: 0 2px;
+}
+
+#size-panel .digit {
+	padding-left: 1px;
+}
+
+
+#color-panel {
+	margin-top: 20px;
+	margin-left: 10px;
+	display: inline-block;
+}
+
+
+#color-panel .btn {
+	width: 35px;
+	height: 25px;
+	border: 1px solid rgba(200,200,200,0.8);
+}
+
+#color-panel .btn-group > .btn:first-child {
+    margin-left: -1;
+}
+
+
+#undo-panel {
+	position: relative;
+	top: 14px;
+	display: inline-block;
+	margin-left: 7px;
+}
+
+
+#paint-clear {
+	margin-left: 0px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	width: 75px;
+	margin-top: 10px;
+}
+
+#github-button {
+	position: relative;
+	top: 30px;
+	margin-left: 6px;
+}
+
+#text_tool {
+    position: absolute;
+    border: 1px dashed black;
+    outline: 0;
+    display: none;
+    
+    padding: 4px 8px; 
+    font: 14px;
+    overflow: hidden;
+    white-space: nowrap;
+    opacity: 0.8;
+
+    z-index: 8;
+}
+
+#crop_area {
+    position: absolute;
+    border: 1px dashed black;
+    outline: 0;
+    /* background: rgba(255, 255, 255, 0); */
+    opacity: 0.6;
+    display: none;
+}
+
+#crop-cancel-button {
+	position: fixed;
+	right: 0px;
+	top: 0px;
+	z-index: 10;
+	display: none;
+}
+
+#crop_canvas {
+	/* position: absolute;
+	top: 20px;
+	right: 5px;
+	z-index: 10; */
+	display: none;
+}
+
+#alert-bottom {
+  font-size: 13px;
+  position: fixed;
+  bottom: 0;
+  margin-bottom: 0 !important;
+  width: 100%;
+  height: 52px;
+  text-align: center;
+  z-index: 0;
+}
