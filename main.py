@@ -7,6 +7,7 @@ import os
 import jinja2
 
 from timer import *
+from blog import *
 
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), 
@@ -47,7 +48,6 @@ class RegisterUserHandler(webapp2.RequestHandler):
 
 
 
-
 class MainHandler(webapp2.RequestHandler):
     def get(self):
         #self.response.write('<h1> CS Laboratory</h1><h3>Author: <a href="https://github.com/bnjasim">Binu Jasim</a></h3><ul><li><a href="isl">Visualizing Indian Super Leageue Home Attendance</a></li><li><a href="paint">Paint Application</a></li><li><a href="texteditor">Rich Text Editor with Paint support in AngularJS</a></li></ul>')
@@ -85,15 +85,6 @@ class DMHandler(Handler):
 	def get(self):
 		self.render('dm.html')	
 
-
-class BlogHandler(Handler):
-	def get(self, url):
-		#logging.error('\nurl is '+url)
-		if url and url is not '/':
-			self.render('blog'+url+'.html')
-		else:
-			self.render('blog/blog-home.html')		
-		#self.response.out.write(url)
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
