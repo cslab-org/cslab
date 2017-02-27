@@ -10,6 +10,8 @@ from timer import *
 from blog import *
 from demo import *
 from teach import *
+from projects import *
+from private import *
 
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), 
@@ -67,6 +69,8 @@ app = webapp2.WSGIApplication([
     (r'/blog(/.*)?', BlogHandler),
     (r'/demo(/.*)?', DemoHandler),
     (r'/teaching(/.*)?', TeachHandler),
+    (r'/projects(/.*)?', ProjectsHandler),
+    (r'/private(/.*)?', PrivateHandler),
 
     ('/timer', TimerHandler),
     ('/timerajax', TimerAjaxHandler),
