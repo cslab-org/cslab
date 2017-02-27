@@ -50,10 +50,9 @@ class RegisterUserHandler(webapp2.RequestHandler):
 
 
 
-class MainHandler(webapp2.RequestHandler):
+class MainHandler(Handler):
     def get(self):
-        #self.response.write('<h1> CS Laboratory</h1><h3>Author: <a href="https://github.com/bnjasim">Binu Jasim</a></h3><ul><li><a href="isl">Visualizing Indian Super Leageue Home Attendance</a></li><li><a href="paint">Paint Application</a></li><li><a href="texteditor">Rich Text Editor with Paint support in AngularJS</a></li></ul>')
-        self.response.write('<h1> CS Laboratory</h1><li><a href="datamining">Data Mining, Monsoon Semester 2016</a></li><li><a href="dbms">Data Base Management Systems, Monsoon Semester 2016</a></li><br/><br/><li><a href="pattern">Pattern Recognition Winter 2016</a></li><li><a href="nlp">Natural Language Processing Winter 2016</a></li></ul>')
+        self.render('home.html')
 
 class BrowHandler(Handler):
 	def get(self):
