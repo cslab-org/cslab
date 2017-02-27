@@ -9,6 +9,7 @@ import jinja2
 from timer import *
 from blog import *
 from demo import *
+from teach import *
 
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), 
@@ -59,32 +60,14 @@ class BrowHandler(Handler):
 		self.render("browpad.html")
 
 
-class PatternRecognitionHandler(Handler):
-	def get(self):
-		self.render('pattern.html')
-
-class NlpHandler(Handler):
-	def get(self):
-		self.render('nlp.html')
-
-class DBMSHandler(Handler):
-	def get(self):
-		self.render('dbms.html')
-
-class DMHandler(Handler):
-	def get(self):
-		self.render('dm.html')	
-
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/browpad', BrowHandler),
-    ('/pattern', PatternRecognitionHandler),
-    ('/nlp', NlpHandler),
-    ('/dbms', DBMSHandler),
-    ('/datamining', DMHandler),
+    
     (r'/blog(/.*)?', BlogHandler),
     (r'/demo(/.*)?', DemoHandler),
+    (r'/teaching(/.*)?', TeachHandler),
 
     ('/timer', TimerHandler),
     ('/timerajax', TimerAjaxHandler),
