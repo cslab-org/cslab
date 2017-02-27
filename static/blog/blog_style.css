@@ -19,11 +19,18 @@ body{
   line-height: 20px;
 }
 
+/*
 .navbar-brand img {
 	width: 24px;
 	height: 24px;
 	display: inline-block;
 	margin-top: -3px;
+} */
+.navbar-brand img {
+  width: 36px;
+  height: 28px;
+  display: inline-block;
+  margin-top: -6px;
 }
 
 .content {

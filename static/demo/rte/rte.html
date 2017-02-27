@@ -1,0 +1,209 @@
+<div class="textarea-outer">
+  <!-- Important that first child is icon-group and second child is text-area -->
+  <div class="textarea-icon-group">
+    <div class="btn-group">
+        <button class="btn" type="button" ng-click="runCommand('bold')" title="Bold">
+          <b class="textarea-i-bold">B</b>
+        </button>
+
+        <button class="btn" type="button" ng-click="runCommand('italic')"title="Italic">
+          <i class="textarea-i-italic">I</i>
+        </button>
+
+        <button class="btn" type="button" ng-click='runCommand("underline")' title="Underline">
+          <u class="textarea-i-underline">U</u>
+        </button>
+
+        <button class="btn" type="button" ng-click='runCommand("strikeThrough")' title="Strike">
+          <strike class="textarea-i-strike">a</strike>
+        </button>
+
+        <button class="btn" type="button" ng-click='runCommand("formatBlock")' title="Heading">
+          <span class="textarea-i-h">{{h}}</span>
+        </button>
+
+        <button class="btn" type="button" ng-click='runCommand("insertUnorderedList")' title="Unordered-List">
+          <span class="textarea-i-ul fa fa-list-ul"></span>
+        </button>
+
+        <button class="btn" type="button" ng-click='runCommand("insertOrderedList")' title="Ordered-List">
+          <span class="textarea-i-ul fa fa-list-ol"></span>
+        </button>
+
+        <button class="btn" type="button" ng-click='runCommand("code")' title="Code">
+          <span class="textarea-i-code" style="margin-top:-3px;">{ }</span>
+        </button>
+
+        <button class="btn" type="button" ng-click='runCommand("hiliteColor","#FFFBCC")' title="Highlite">
+          <span class="textarea-i-hilite fa fa-eyedropper" style="background-color:#fffbcc;"></span>
+        </button>
+
+        <button class="btn" type="button" ng-click='runCommand("br")' title="Line Break">
+          <span class="textarea-i-br">br</span>
+        </button>
+
+        <button class="btn" type="button" ng-click='runCommand("insertHorizontalRule")' title="Horizontal Rule">
+          <span class="textarea-i-hrule fa fa-arrows-h"></span>
+        </button>
+
+        <button class="btn" type="button" ng-click='runCommand("link")' title="Link">
+          <span class="textarea-i-link fa fa-link"></span>
+        </button>
+
+    </div>
+
+    <div class="btn-group">
+        <button class="btn" type="button" ng-click="runCommand('justifyLeft')" title="Align Left">
+          <span class="textarea-i-align fa fa-align-left"></span>
+        </button>
+
+        <button class="btn" type="button" ng-click="runCommand('justifyCenter')" title="Align Center">
+          <span class="textarea-i-align fa fa-align-center"></span>
+        </button>
+
+        <button class="btn" type="button" ng-click="runCommand('justifyRight')" title="Align Right">
+          <span class="textarea-i-align fa fa-align-right"></span>
+        </button>
+
+    </div>
+                  
+    <div class="btn-group float-right" uib-dropdown>  
+
+    	<button class="btn" type="button" ng-click='insertImage()' title="Image">
+          <div class="textarea-i-image fa fa-image"></div>
+        </button>
+
+        <button class="btn" type="button" ng-click="launchPaint()" title="Paint">
+          <div class="textarea-i-square" style="width:30px;margin-top:-1px">Paint</div>
+        </button>
+
+        <button class="btn" type="button" ng-click='runCommand("icon", "check-square-o")' title="Check">
+          <div class="textarea-i-check-square-o fa fa-check-square-o"></div>
+        </button>
+       
+	   
+	      <span type="button" uib-dropdown-toggle class="btn btn-default dropdown-toggle">
+	        <div class="fa fa-caret-down"></div> 
+	      </span>
+
+          <ul class="uib-dropdown-menu dropdown-menu-right all-icons-dropdown-menu" role="menu">
+            
+            <button class="btn" type="button" ng-click='runCommand("icon", "smile-o")' title="Smiley">
+              <div class="textarea-i-smile fa fa-smile-o"></div>
+            </button>
+
+
+            <button class="btn" type="button" ng-click='runCommand("icon", "heart")' title="Heart">
+              <div class="textarea-i-heart fa fa-heart"></div>
+            </button>
+
+            <button class="btn" type="button" ng-click='runCommand("icon", "bug")' title="Bug">
+              <div class="textarea-i-bug fa fa-bug"></div>
+            </button>
+
+            <button class="btn" type="button" ng-click='runCommand("icon", "asterisk")' title="Asterisk">
+              <div class="textarea-i-a fa fa-asterisk"></div>
+            </button>
+
+            <button class="btn" type="button" ng-click='runCommand("icon", "remove")' title="Remove">
+              <div class="textarea-i-remove fa fa-remove"></div>
+            </button>
+
+            <button class="btn" type="button" ng-click='runCommand("icon", "thumbs-o-up")' title="Thumbs up">
+              <div class="textarea-i-thumbs-up fa fa-thumbs-o-up"></div>
+            </button>
+
+			<button class="btn" type="button" ng-click='runCommand("icon", "flask")' title="Flask">
+              <div class="textarea-i-phone fa fa-flask"></div>
+            </button>
+
+            <button class="btn" type="button" ng-click='runCommand("icon", "thumbs-o-down")' title="Thumbs down">
+              <div class="textarea-i-thumbs-down fa fa-thumbs-o-down"></div>
+            </button>            
+
+            <button class="btn" type="button" ng-click='runCommand("icon", "star")' title="Star">
+              <div class="textarea-i-star fa fa-star"></div>
+            </button>            
+
+
+            <button class="btn" type="button" ng-click='runCommand("icon", "hand-o-right")' title="Hand Right">
+              <div class="textarea-i-hand fa fa-hand-o-right"></div>
+            </button>
+
+
+            <button class="btn" type="button" ng-click='runCommand("icon", "hand-o-left")' title="Hand Left">
+              <div class="textarea-i-hand fa fa-hand-o-left"></div>
+            </button>
+
+
+            <button class="btn" type="button" ng-click='runCommand("icon", "warning")' title="Warning">
+              <div class="textarea-i-warning fa fa-warning"></div>
+            </button>
+
+
+            <button class="btn" type="button" ng-click='runCommand("icon", "download")' title="Download">
+              <div class="textarea-i-download fa fa-download"></div>
+            </button>
+
+
+            <button class="btn" type="button" ng-click='runCommand("icon", "trash-o")' title="Trash">
+              <div class="textarea-i-trash fa fa-trash-o"></div>
+            </button>
+
+            <button class="btn" type="button" ng-click='runCommand("icon", "lock")' title="Lock">
+              <div class="textarea-i-lock fa fa-lock"></div>
+            </button>
+
+            <button class="btn" type="button" ng-click='runCommand("icon", "ban")' title="Ban">
+              <div class="textarea-i-ban fa fa-ban"></div>
+            </button>
+
+            <button class="btn" type="button" ng-click='runCommand("icon", "bullhorn")' title="Horn">
+              <div class="textarea-i-bullhorn fa fa-bullhorn"></div>
+            </button>
+
+            <button class="btn" type="button" ng-click='runCommand("icon", "phone")' title="Call">
+              <div class="textarea-i-phone fa fa-phone"></div>
+            </button>
+
+           <button class="btn" type="button" ng-click='runCommand("icon", "music")' title="Music">
+              <div class="textarea-i-music fa fa-music"></div>
+            </button>
+
+            <button class="btn" type="button" ng-click='runCommand("icon", "book")' title="Book">
+              <div class="textarea-i-b fa fa-book"></div>
+            </button>
+
+            <button class="btn" type="button" ng-click='runCommand("icon", "envelope")' title="Message">
+              <div class="textarea-i-envelope fa fa-envelope"></div>
+            </button>
+
+            <button class="btn" type="button" ng-click='runCommand("icon", "comment")' title="Comment">
+              <div class="textarea-i-comment fa fa-comment"></div>
+            </button>
+
+            <button class="btn" type="button" ng-click='runCommand("icon", "question")' title="Question">
+              <div class="textarea-i-question fa fa-question"></div>
+            </button>
+
+            
+            <button class="btn" type="button" ng-click='runCommand("icon", "trophy")' title="Trophy">
+              <div class="textarea-i-trophy fa fa-trophy"></div>
+            </button>
+
+            <button class="btn" type="button" ng-click='runCommand("icon", "futbol-o")' title="Play">
+              <div class="textarea-i-play fa fa-futbol-o"></div>
+            </button>
+          </ul> 
+       
+    </div>
+
+  </div>   
+
+<div class="clearfix"></div>
+
+<div class="textarea-div" contenteditable></div>
+
+<div class="textarea-footer">
+	<button class="btn btn-primary" type="button" ng-click="copyContent()">OK</button>
+</div>

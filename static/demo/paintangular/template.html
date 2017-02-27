@@ -1,0 +1,140 @@
+<div id="main-layout">
+
+  <div id="color-panel">
+	<div class="btn-group">
+		<button class="btn" type="button" title="Black"  style="background-color:{{color}}"> 
+        </button>  
+		<button class="btn" type="button" ng-click="setColor('red')" title="Red" style="background-color:red">
+		</button>
+		<button class="btn" type="button" ng-click="setColor('lime')" title="Green" style="background-color:lime">	
+		</button>          
+		<button class="btn" type="button" ng-click="setColor('blue')" title="Blue" style="background-color:blue">	
+		</button>          
+		<button class="btn" type="button" title="Yellow"  ng-click="setColor('yellow')" style="background-color:yellow">	
+		</button>          
+		<button class="btn" type="button"  ng-click="setColor('magenta')" title="Magenta" style="background-color:magenta">	
+		</button>          
+		<button class="btn" type="button"  ng-click="setColor('cyan')" title="Cyan" style="background-color:cyan">	
+		</button>          
+		<button class="btn" type="button" title="Orange"  ng-click="setColor('orange')" style="background-color:orange">	
+		</button>          
+		<button class="btn" type="button"  ng-click="setColor('purple')" title="Purple" style="background-color:purple">	
+		</button>          
+		         
+		<button class="btn" type="button" title="Brown" ng-click="setColor('brown')"  style="background-color:brown">	
+		</button>          
+		<button class="btn" type="button" title="Black"  ng-click="setColor('black')" style="background-color:black">	
+		</button>     
+		<button class="btn" type="button" title="Gray"  ng-click="setColor('gray')" style="background-color:gray">	
+		</button>     
+		<button class="btn" type="button" title="lavender"  ng-click="setColor('lavender')" style="background-color:lavender">	
+        </button>
+		<button class="btn" type="button" ng-click="setColor('white')" title="White" style="background-color:white">
+		</button>
+		  
+  	</div>
+
+  </div>	
+
+  <div id="paint-undo-redo">
+  	<div class="btn-group">
+  		<button ng-click="undo()" id="undo-tool" class="btn" type="button" title="Undo">	
+  			<div class="fa fa-undo"></div>
+		</button>          
+		<button ng-click="redo()" id="redo-tool" class="btn" type="button" title="Redo">	
+  			<div class="fa fa-repeat"></div>
+		</button>          
+  	</div>
+  </div>
+
+  <div id="clear-btn">
+    <button ng-click="cls()" class="btn" type="button"  title="Clear Canvas">
+        <div class="fa fa-trash"></div>
+    </button>
+
+    <button ng-click="download()" class="btn" type="button"  title="Download">
+        <div class="fa fa-download"></div>
+    </button>
+  </div>  
+
+  <div id="paint">
+     
+      <!-- Tools panel -->
+      <div id="tools-panel">
+
+        <div class="btn-group">
+            <button class="btn" type="button" ng-click="setTool('pencil')" title="Pencil">
+                <div class="fa fa-pencil"></div>
+            </button>
+
+            <button class="btn" type="button" ng-click="setTool('line')" title="Line">
+                <b class="">&nbsp;|</b>
+            </button>
+
+            <button class="btn" type="button" ng-click="setTool('eraser')" title="Eraser">
+                <div class="fa fa-eraser"></div>
+            </button>
+
+            <button class="btn" type="button" ng-click="setTool('square')" title="Square">
+                <div class="fa fa-square-o"></div>
+            </button>
+
+            <button class="btn" type="button" ng-click="setTool('fill')" title="Fill">
+                <div class="fa fa-tint"></div>
+            </button>
+
+            <button class="btn" type="button" ng-click="setTool('circle')" title="Circle">
+                &nbsp;<div class="fa fa-circle-o"></div>
+            </button>
+
+            <button class="btn" type="button" ng-click="setTool('text')" title="Text">
+                <div class="fa fa-font"></div>
+            </button>
+
+            <button class="btn" type="button" ng-click="setTool('ellipse')" title="Ellipse">
+                <div class="fa fa-opera"></div>
+            </button>
+
+            
+            
+        </div>
+
+        <form id="choose-size">
+            <div class="title">choose size</div>
+            <div class="radio-group" ng-click="chooseSize(1)">
+                <input type="radio" name="size" value="1">1</div>
+            <div class="radio-group" ng-click="chooseSize(2)">
+                <input type="radio" name="size" value="2" checked="checked">2</div>
+            <div class="radio-group" ng-click="chooseSize(3)">
+                <input type="radio" name="size" value="3">3</div>
+            <div class="radio-group" ng-click="chooseSize(4)">
+                <input type="radio" name="size" value="4">4</div>
+        
+        <div id="clear-btn-mobile">
+            <button ng-click="cls()" class="btn" type="button"  title="Clear Canvas">
+                <div class="fa fa-trash"></div>
+            </button>
+
+            <button ng-click="download()" class="btn" type="button"  title="Download">
+                <div class="fa fa-download"></div>
+            </button>
+        </div>      
+
+        </form>
+
+    </div>      
+
+
+      <!-- Canvas -->
+      <div id="sketch" canvasable>
+        <canvas id="canvas"></canvas>
+        <canvas id="tmp_canvas"></canvas>
+        <!-- An area to drag to resize the canvas -->
+        <div class="resize-div"></div>
+      </div>
+
+
+  </div>    
+
+</div>
+

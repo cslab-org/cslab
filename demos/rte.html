@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html ng-app="hummuse.texteditor">  
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Text Editor</title>
+  <link rel="stylesheet" type="text/css" href="/static/bootstrap.css"/>
+  <link rel="stylesheet" type="text/css" href="/static/font-awesome/css/font-awesome.min.css"/>
+  <link rel="stylesheet" type="text/css" href="/static/demo/rte/style.css"/>
+</head>
+
+<body ng-controller="mainController">
+<div class="heading"><h2>Angular RTE (Rich Text Editor)</h2></div>
+
+<!-- Directive -->
+<paintangular></paintangular>
+<angular-rte text-content="content"></angular-rte>
+
+<div class="textarea-outer" ng-bind-html="content | sanitize">
+</div>
+
+</body>
+<script type="text/javascript" src="/static/demo/angular.min.js"></script>
+<script type="text/javascript" src="/static/demo/ui-bootstrap.js"></script>
+<script type="text/javascript" src="/static/demo/rte/paintangular.js"></script>
+<script type="text/javascript" src="/static/demo/rte/angular-rte.js"></script>
+</html>

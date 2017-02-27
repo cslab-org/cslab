@@ -8,6 +8,7 @@ import jinja2
 
 from timer import *
 from blog import *
+from demo import *
 
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), 
@@ -57,17 +58,6 @@ class BrowHandler(Handler):
 	def get(self):
 		self.render("browpad.html")
 
-class IslHandler(Handler):
-	def get(self):
-		self.render("slopegraph-isl.html")
-
-class PaintHandler(Handler):
-	def get(self):
-		self.render('paintangular.html')
-
-class TEHandler(Handler):
-	def get(self):
-		self.render('angular-rte.html')	
 
 class PatternRecognitionHandler(Handler):
 	def get(self):
@@ -89,16 +79,16 @@ class DMHandler(Handler):
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/browpad', BrowHandler),
-    ('/isl', IslHandler),
-    ('/paint', PaintHandler),
-    ('/texteditor', TEHandler),
     ('/pattern', PatternRecognitionHandler),
     ('/nlp', NlpHandler),
     ('/dbms', DBMSHandler),
     ('/datamining', DMHandler),
     (r'/blog(/.*)?', BlogHandler),
+    (r'/demo(/.*)?', DemoHandler),
+
     ('/timer', TimerHandler),
     ('/timerajax', TimerAjaxHandler),
     ('/timerdata', TimerDataHandler),
+
     ('/login', RegisterUserHandler)
 ], debug=True)
