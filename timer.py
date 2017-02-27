@@ -71,7 +71,7 @@ class TimerHandler(Handler):
 	def get(self):	
 		user = users.get_current_user()
 		if user is None: 
-			self.redirect(users.create_login_url('/login'))
+			self.redirect(users.create_login_url('/timer'))
 			
 		else:
 			logout = users.create_logout_url('/')
@@ -85,7 +85,7 @@ class TimerHandler(Handler):
 		
 		user = users.get_current_user()
 		if user is None: 
-			self.redirect(users.create_login_url('/login'))
+			self.redirect(users.create_login_url('/timer'))
 			
 		else:
 			user = users.get_current_user()
@@ -139,7 +139,7 @@ class TimerAjaxHandler(Handler):
 	def get(self):	
 		user = users.get_current_user()
 		if user is None: 
-			self.redirect(users.create_login_url('/login'))
+			self.redirect(users.create_login_url('/timer'))
 			
 		else:
 			logout = users.create_logout_url('/')
@@ -168,7 +168,7 @@ class TimerAjaxHandler(Handler):
 		
 		user = users.get_current_user()
 		if user is None: 
-			self.redirect(users.create_login_url('/login'))
+			self.redirect(users.create_login_url('/timer'))
 			
 		else:
 			user = users.get_current_user()
@@ -206,7 +206,7 @@ class TimerDataHandler(Handler):
 	def get(self):	
 		user = users.get_current_user()
 		if user is None: 
-			self.redirect(users.create_login_url('/login'))
+			self.redirect(users.create_login_url('/timer'))
 			
 		else:
 			logout = users.create_logout_url('/')

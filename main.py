@@ -45,7 +45,7 @@ class RegisterUserHandler(webapp2.RequestHandler):
 				nickname = nickname, 
 				email = email)
 			# Login successful Redirecting to timer. But may have to change later
-			self.redirect('/timer')			
+			# self.redirect('/timer')			
 
 		else:
 			self.response.write('Access Denied')
