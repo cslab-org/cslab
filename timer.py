@@ -74,7 +74,13 @@ class TimerHandler(Handler):
 			self.redirect(users.create_login_url('/timer'))
 			
 		else:
+			user_id = user.user_id()
+			nickname = user.nickname()
+			email = user.email()
 			logout = users.create_logout_url('/')
+			# register user if not already
+			status = Account.my_get_or_insert(user_id, nickname = nickname, email = email)
+			
 			self.render('timer.html',
 				user_name = user.nickname(), 
 				logout_url = logout)	
@@ -85,7 +91,10 @@ class TimerHandler(Handler):
 		
 		user = users.get_current_user()
 		if user is None: 
-			self.redirect(users.create_login_url('/timer'))
+			#self.redirect(users.create_login_url('/timer'))
+			#self.response.out.write('Error: Not logged in')
+			# Never going to happen - still...
+			self.redirect('/')
 			
 		else:
 			user = users.get_current_user()
@@ -139,7 +148,9 @@ class TimerAjaxHandler(Handler):
 	def get(self):	
 		user = users.get_current_user()
 		if user is None: 
-			self.redirect(users.create_login_url('/timer'))
+			#self.redirect(users.create_login_url('/timer'))
+			# Never going to happen - still...
+			self.redirect('/')
 			
 		else:
 			logout = users.create_logout_url('/')
@@ -168,7 +179,9 @@ class TimerAjaxHandler(Handler):
 		
 		user = users.get_current_user()
 		if user is None: 
-			self.redirect(users.create_login_url('/timer'))
+			#self.redirect(users.create_login_url('/timer'))
+			# Never going to happen - still...
+			self.redirect('/')
 			
 		else:
 			user = users.get_current_user()
@@ -206,7 +219,9 @@ class TimerDataHandler(Handler):
 	def get(self):	
 		user = users.get_current_user()
 		if user is None: 
-			self.redirect(users.create_login_url('/timer'))
+			#self.redirect(users.create_login_url('/timer'))
+			# Never going to happen - still...
+			self.redirect('/')
 			
 		else:
 			logout = users.create_logout_url('/')
