@@ -12,27 +12,12 @@ import json
 import os
 import jinja2
 
+from account import *
+
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),  autoescape = True)
 
-# username is not Id because users might change their user name or email
-class Account(ndb.Model):
-	nickname = ndb.StringProperty()
-	email = ndb.StringProperty()
-	userCreated = ndb.DateTimeProperty(auto_now_add = True)
 
-	@classmethod
-	@ndb.transactional
-	def my_get_or_insert(cls, id, **kwds):
-		key = ndb.Key(cls, id)
-		ent = key.get()
-		if ent is not None:
-			return False  # False meaning "Already existing"
-		ent = cls(**kwds)
-		ent.key = key
-		ent.put()
-		return True  # True meaning "Newly created"
-	
 class Entry(ndb.Model):
 	# The parent of an Entry is Account
 	date = ndb.DateProperty(indexed = True)	
@@ -80,7 +65,7 @@ class TimerHandler(Handler):
 			logout = users.create_logout_url('/')
 			# register user if not already
 			status = Account.my_get_or_insert(user_id, nickname = nickname, email = email)
-			
+
 			self.render('timer.html',
 				user_name = user.nickname(), 
 				logout_url = logout)	
@@ -91,11 +76,11 @@ class TimerHandler(Handler):
 		
 		user = users.get_current_user()
 		if user is None: 
-			#self.redirect(users.create_login_url('/timer'))
-			#self.response.out.write('Error: Not logged in')
-			# Never going to happen - still...
-			self.redirect('/')
-			
+			# redirect doesn't work in ajax
+			self.redirect(users.create_login_url(self.request.url))	
+			#self.response.out.write('Error: Not logged in') - doesn't work in ajax
+			# Never going to happen - Actually it can happen if we log out and then press back in browser
+			#self.redirect('/') -doesn't work
 		else:
 			user = users.get_current_user()
 			user_ent_key = ndb.Key(Account, user.user_id())	
@@ -148,9 +133,7 @@ class TimerAjaxHandler(Handler):
 	def get(self):	
 		user = users.get_current_user()
 		if user is None: 
-			#self.redirect(users.create_login_url('/timer'))
-			# Never going to happen - still...
-			self.redirect('/')
+			self.redirect(users.create_login_url(self.request.url))	
 			
 		else:
 			logout = users.create_logout_url('/')
@@ -179,9 +162,8 @@ class TimerAjaxHandler(Handler):
 		
 		user = users.get_current_user()
 		if user is None: 
-			#self.redirect(users.create_login_url('/timer'))
-			# Never going to happen - still...
-			self.redirect('/')
+			# redirect doesn't work in ajax
+			self.redirect(users.create_login_url(self.request.url))	
 			
 		else:
 			user = users.get_current_user()
@@ -219,9 +201,7 @@ class TimerDataHandler(Handler):
 	def get(self):	
 		user = users.get_current_user()
 		if user is None: 
-			#self.redirect(users.create_login_url('/timer'))
-			# Never going to happen - still...
-			self.redirect('/')
+			self.redirect(users.create_login_url(self.request.url))	
 			
 		else:
 			logout = users.create_logout_url('/')

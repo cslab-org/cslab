@@ -6,6 +6,8 @@ import logging
 import os
 import jinja2
 
+# import the Account ndb Model
+from account import *
 
 template_dir = os.path.join(os.path.dirname(__file__), 'private-articles')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),  autoescape = True)
@@ -35,16 +37,24 @@ class PrivateHandler(Handler):
 			nickname = user.nickname()
 			email = user.email()
 			logout = users.create_logout_url('/')
+			# Proceed only if an approved user
+			if (is_approved_user(email)):
+				# register user if not already registered
+				status = Account.my_get_or_insert(user_id, nickname = nickname, email = email)
+				
+				if url and url is not '/':
+					self.render(url+'.html',
+						user_name = user.nickname(), 
+						logout_url = logout)	
+				else:
+					self.render('private-home.html',
+						user_name = user.nickname(), 
+						logout_url = logout)		
 
+			else:
+				self.write('Access Denied! Contact Admin')	
 
 		else:
 			self.redirect(users.create_login_url(self.request.url))	
 
-		
-		
-				
-		if url and url is not '/':
-			self.render(url+'.html')
-		else:
-			self.render('private-home.html')		
-		#self.response.out.write(url)
+
