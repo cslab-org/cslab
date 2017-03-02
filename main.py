@@ -12,6 +12,7 @@ from demo import *
 from teach import *
 from projects import *
 from private import *
+from write import *
 
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), 
@@ -75,6 +76,8 @@ app = webapp2.WSGIApplication([
     ('/timer', TimerHandler),
     ('/timerajax', TimerAjaxHandler),
     ('/timerdata', TimerDataHandler),
+
+    ('/write', WriteHandler),
 
     ('/login', RegisterUserHandler)
 ], debug=True)
