@@ -63,7 +63,7 @@ class WriteHandler(Handler):
 					logout_url = logout)		
 
 			else:
-				self.write('You dont have permission write articles! Contact Admin')	
+				self.write('You dont have permission to write articles! Contact Admin')	
 
 		else:
 			self.redirect(users.create_login_url(self.request.url))	

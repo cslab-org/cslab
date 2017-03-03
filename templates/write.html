@@ -6,10 +6,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  
+  <title>CS Lab Write</title>
+
   <link rel="stylesheet" type="text/css" href="/static/bootstrap.css"/>
   <link rel="stylesheet" type="text/css" href="/static/blog/blog_style.css"/>
-  <title>CS Lab</title>
+  <script src="static/write/writer.js"></script>
+  
 </head>
 
 <body>
@@ -20,9 +22,11 @@
 			  <img alt="Brand" src="/static/logo.png">
 			  CS_Lab
 			</a>
-			
 		</div>
 		
+		<div class="navbar-right" style="padding: 15px 0px;">
+		  <a href="{{logout_url}}">Logout</a> 
+		</div>
 
 	</div>
   </div>
@@ -30,17 +34,10 @@
 <div class="container">
 <div class="row">
 
-<div class="col-md-10 col-md-push-1 content"> 
-
-
-<h1> CS Laboratory</h1>
-
-<ul>
-<li><a href="/teaching/dm">Data Mining, Monsoon Semester 2016</a></li>
-<li><a href="/teaching/dbms">Data Base Management Systems, Monsoon Semester 2016</a></li>
-<li><a href="/teaching/pattern">Pattern Recognition Winter 2016</a></li>
-<li><a href="/teaching/nlp">Natural Language Processing Winter 2016</a></li>
-</ul>
+<div class="col-md-8 col-md-push-2" id="all-prev-articles"> 
+  
+  <!-- List of all articles. Use AJAX to retrieve from the datastore and render in the client side -->
+  
 
 
 </div>
