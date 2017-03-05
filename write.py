@@ -69,5 +69,23 @@ class WriteHandler(Handler):
 			self.redirect(users.create_login_url(self.request.url))	
 
 
+	def post(self):
+		
+		user = users.get_current_user()
+		if user is None: 
+			# redirect doesn't work in ajax
+			self.redirect(users.create_login_url(self.request.url))	
+			
+		else:
+			user = users.get_current_user()
+			user_ent_key = ndb.Key(Account, user.user_id())	
+
+			t = datetime.date.today() # datetime.date(2017, 1, 10) 
+			ndb_date = t#.replace(year = int(date[0:4]), month = int(date[5:7]), day = int(date[8:10]))
+
+			article = Article(dateCreated=ndb_date, lastEdited=ndb_date, title="LSH", description="my favorite article", kind="blog")		
+			article.put()
+
+
 
 
