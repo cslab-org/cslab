@@ -10,6 +10,7 @@
 
   <link rel="stylesheet" type="text/css" href="/static/bootstrap.css"/>
   <link rel="stylesheet" type="text/css" href="/static/blog/blog_style.css"/>
+  <link rel="stylesheet" type="text/css" href="/static/write/writer_style.css"/>
   <script src="static/jquery.js"></script>
   <script src="static/write/writer.js"></script>
   
@@ -35,10 +36,28 @@
 <div class="container">
 <div class="row">
 
-<div class="col-md-8 col-md-push-2" id="all-prev-articles"> 
+<div class="col-md-8 col-md-push-2 content" id="all-prev-articles"> 
   
+  <h4>New Article</h4>
+  <form class="form-inline">
+	  <label class="sr-only" for="inlineFormInputGroup">Link</label>
+	  <div class="input-group mb-2 mr-sm-2 mb-sm-0" style="margin-right:10px">
+	    <div class="input-group-addon">/</div>
+	    <input type="text" class="form-control" id="article-link" placeholder="article-link">
+	  </div>
+
+	  <span class="mr-sm-2" for="inlineFormCustomSelect">Kind</span>
+	  <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="article-kind"  style="margin-right:10px">
+	    <option selected>Blog</option>
+	    <option value="1">Project</option>
+	    <option value="2">Private</option>
+	  </select>
+
+	  <button type="submit" class="btn btn-primary">Submit</button>
+  </form>	
+
   <!-- List of all articles. Use AJAX to retrieve from the datastore and render in the client side -->
-  
+  <h4 style="margin-top:60px">Previous Articles</h4>
 
 
 </div>

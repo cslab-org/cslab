@@ -24,10 +24,12 @@ class Article(ndb.Model):
 	lastEdited = ndb.DateProperty(indexed = True)
 	content = ndb.TextProperty()
 	title = ndb.StringProperty() # max 500 characters
-	description = ndb.TextProperty()
+	# description is max 500 characters - we won't enforce it but more will cause a write error
+	description = ndb.StringProperty()
 	# kind can be either of "blog", "project" or "private", but not enforcing it
 	kind = ndb.StringProperty()
-
+	# link is not a key. only keep newton-method in staed of cslab.org/blog/newton-method
+	link = ndb.StringProperty(required=True)
 
 class Handler(webapp2.RequestHandler):
 	def write(self, *a, **kw):
@@ -83,7 +85,7 @@ class WriteHandler(Handler):
 			t = datetime.date.today() # datetime.date(2017, 1, 10) 
 			ndb_date = t#.replace(year = int(date[0:4]), month = int(date[5:7]), day = int(date[8:10]))
 
-			article = Article(dateCreated=ndb_date, lastEdited=ndb_date, title="LSH", description="my favorite article", kind="blog")		
+			article = Article(dateCreated=ndb_date, lastEdited=ndb_date, content="Great content", title="Deep Learning", description="my second article", kind="blog", link="deeplearnig")		
 			article.put()
 
 

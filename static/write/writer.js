@@ -3,7 +3,7 @@
 }, false); */
 
 $(document).ready(function(){
-	$.ajax({
+	/*$.ajax({
 			url: '/write',
 			type: 'POST',
 			data: {},
@@ -14,5 +14,5 @@ $(document).ready(function(){
 			error: function(e){
 				console.log('Error' + e);
 			}
-		}); 
+		}); */
 })
