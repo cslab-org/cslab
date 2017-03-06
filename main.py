@@ -78,6 +78,7 @@ app = webapp2.WSGIApplication([
     ('/timerdata', TimerDataHandler),
 
     ('/write', WriteHandler),
+    ('/writeajax', WriteAjaxHandler),
 
     ('/login', RegisterUserHandler)
 ], debug=True)

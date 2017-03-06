@@ -3,16 +3,17 @@
 }, false); */
 
 $(document).ready(function(){
-	/*$.ajax({
-			url: '/write',
-			type: 'POST',
-			data: {},
-			dataType: 'json',
+	$.ajax({
+			url: '/writeajax',
+			type: 'GET',
+
 			success: function(received_data){
-				console.log('Ajax successful!');
+				console.log(received_data);
 			},
 			error: function(e){
 				console.log('Error' + e);
 			}
-		}); */
+		}); 
+	
+	
 })

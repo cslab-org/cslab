@@ -85,9 +85,40 @@ class WriteHandler(Handler):
 			t = datetime.date.today() # datetime.date(2017, 1, 10) 
 			ndb_date = t#.replace(year = int(date[0:4]), month = int(date[5:7]), day = int(date[8:10]))
 
-			article = Article(dateCreated=ndb_date, lastEdited=ndb_date, content="Great content", title="Deep Learning", description="my second article", kind="blog", link="deeplearnig")		
+			article = Article(parent=user_ent_key, dateCreated=ndb_date, lastEdited=ndb_date, content="**bold** *article*", title="RNN", description="my first project", kind="project", link="rnn")		
 			article.put()
 
 
 
+class WriteAjaxHandler(Handler):
+	# To retrieve the list of all articles
+	def get(self):
+		# make sure the user is logged in
+		user = users.get_current_user()
+		if user is None:
+			# Redirect actually doesn't work in ajax - still... leave it 
+			self.redirect(users.create_login_url(self.request.url))	
+			
+		else:
+			user_id = user.user_id()
+			user_ent_key = ndb.Key(Account, user_id)
 
+			qry = Article.query(ancestor=user_ent_key).order(-Article.lastEdited)
+			qry_result = qry.fetch()
+
+			# The dates are has to be made JSON serializable
+			response_data = []
+			for entry in qry_result:
+				date = entry.lastEdited
+				last_date = ('0'+str(date.day) if date.day < 10 else str(date.day)) + '-' + ('0'+str(date.month) if date.month < 10 else str(date.month)) + '-' + str(date.year)
+
+				temp = {"lastEdited":last_date, "title":entry.title, "description":entry.description, "link":entry.link, "kind":entry.kind}
+				response_data.append(temp)
+
+			self.response.out.write(json.dumps(response_data))
+
+
+
+
+
+			
