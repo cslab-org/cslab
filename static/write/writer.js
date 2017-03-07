@@ -14,8 +14,14 @@ $(document).ready(function(){
 			
 			for (var i=0; i<data.length; i++) {
 				var datum = data[i];
+				var title = datum.kind + '/' + datum['link'];
+				// If title is not null
+				if (datum.title) {
+					title = title + '  (' + datum.title  + ')';
+				}
+				
 				var one_article = $('<div class="each-article-list-div">' + 
-					'<div class="each-article-title">' + datum['title'] + '</div>' + 
+					'<div class="each-article-title">' + title + '</div>' + 
 					'<div class="each-article-sub-lining">' + 
 						'<div class="each-article-kind">' + datum['kind'] + '</div>' +
 						'last edited: ' + datum['lastEdited'] +
