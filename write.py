@@ -119,6 +119,22 @@ class WriteAjaxHandler(Handler):
 
 
 
+# To render the writedown page where we write markdown 
+class WriteDownHandler(Handler):
+	# To render page with db query to the content
+	def get(self):
+		# make sure the user is logged in
+		user = users.get_current_user()
+		if user is None:
+			# Redirect actually doesn't work in ajax - still... leave it 
+			self.redirect(users.create_login_url(self.request.url))	
+			
+		else:
+			user_id = user.user_id()
+			user_ent_key = ndb.Key(Account, user_id)
 
 
+			self.render('writedown.html',
+					user_name = user.nickname(), 
+			)	
 			
