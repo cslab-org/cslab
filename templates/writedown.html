@@ -48,7 +48,7 @@
    <div class="row">
     <div class="col-md-9">
          
-    <input type="text" class="form-control" id="writedown-title" placeholder="Title">
+    <input type="text" class="form-control" id="writedown-title" placeholder="Title" {% if title %} value={{title}} {% endif %}>
     <!-- Text Area -->
     <div class="textarea-outer">
       <!-- Important that first child is icon-group and second child is text-area -->
@@ -154,13 +154,24 @@
 
       </div>
 
-      <textarea id="textarea-div">{{content}}</textarea>
+      {% if content %}
+        <textarea id="textarea-div">{{content}}</textarea>
+      {% else %}
+        <textarea id="textarea-div"></textarea>
+      {% endif %}  
+      
 
       <div id="clipboard-div">
         <button id="clipboard-btn">Copy HTML to Clipboard</button>
+
         {% if user_name %}
-        <textarea class="form-control" id="writedown-description" placeholder="Description"></textarea>
-        <button type="submit" id="save-button" class="btn-xs btn-primary">Save</button>
+          {% if description %}
+          <textarea class="form-control" id="writedown-description" placeholder="Description">{{description}}</textarea>
+          {% else %}
+          <textarea class="form-control" id="writedown-description" placeholder="Description"></textarea>
+          {% endif %}
+        
+          <button type="submit" id="save-button" class="btn-xs btn-primary">Save</button>
         {% endif %}
       </div>
 

@@ -164,7 +164,8 @@ class WriteDownHandler(Handler):
 	# To render page with db query to the content
 	def get(self):
 		id_article = str(self.request.get('id'))
-		# if provided an id, make sure user is logged in otherwise just render the page without bells and whistles
+		# if provided an id, make sure user is logged in 
+		# otherwise just render the page without title, desc and save options
 		user = users.get_current_user()
 		if user is None and id_article:
 			# Redirect actually doesn't work in ajax - still... leave it 
@@ -182,5 +183,5 @@ class WriteDownHandler(Handler):
 				if article is None:
 					self.response.write('*****************Sorry Couldnt retrieve item************')
 				else:	
-					self.render('writedown.html', user_name = user.nickname(), content=article.content)	
+					self.render('writedown.html', user_name = user.nickname(), content=article.content, title=article.title, description=article.description)	
 				
