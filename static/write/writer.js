@@ -61,7 +61,6 @@ $(document).ready(function(){
 					var data = JSON.parse(received_data);
 					if (data.result) {
 						// available
-						
 						$('#check-avail').find('div').html('<span style="color:green;">Available</span>');
 					}
 					
@@ -72,12 +71,20 @@ $(document).ready(function(){
 					// Fade away result after 5s
 					setTimeout(function() {
 						$('#check-avail').find('div').html('');
-					}, 5000)
+					}, 5000);
 				},
 				error: function(e){
 					console.log('Error' + e);
 				}
 			}); 
+		}
+		// if link is empty show red around the input field
+		else {
+			$('#choose-article-link').parent().addClass('has-error');
+			// remove red backlining after 5s
+			setTimeout(function() {
+				$('#choose-article-link').parent().removeClass('has-error');
+			}, 5000);
 		}
 	});
 	
@@ -117,6 +124,14 @@ $(document).ready(function(){
 					console.log('Error' + e);
 				}
 			}); 
+		}
+		// if link is empty show red around the input field
+		else {
+			$('#choose-article-link').parent().addClass('has-error');
+			// remove red backlining after 5s
+			setTimeout(function() {
+				$('#choose-article-link').parent().removeClass('has-error');
+			}, 5000);
 		}
 	})
 })
