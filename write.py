@@ -112,7 +112,7 @@ class WriteAjaxHandler(Handler):
 				date = entry.lastEdited
 				last_date = ('0'+str(date.day) if date.day < 10 else str(date.day)) + '-' + ('0'+str(date.month) if date.month < 10 else str(date.month)) + '-' + str(date.year)
 
-				temp = {"lastEdited":last_date, "title":entry.title, "description":entry.description, "link":entry.link, "kind":entry.kind}
+				temp = {"id":entry.key.id(), "lastEdited":last_date, "title":entry.title, "description":entry.description, "link":entry.link, "kind":entry.kind}
 				response_data.append(temp)
 
 			self.response.out.write(json.dumps(response_data))
