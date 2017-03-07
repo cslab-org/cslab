@@ -163,21 +163,24 @@ class WriteCheckAvailability(Handler):
 class WriteDownHandler(Handler):
 	# To render page with db query to the content
 	def get(self):
-		# make sure the user is logged in
+		id_article = str(self.request.get('id'))
+		# if provided an id, make sure user is logged in otherwise just render the page without bells and whistles
 		user = users.get_current_user()
-		if user is None:
+		if user is None and id_article:
 			# Redirect actually doesn't work in ajax - still... leave it 
 			self.redirect(users.create_login_url(self.request.url))	
 			
 		else:
-			user_id = user.user_id()
-			id_article = str(self.request.get('id'))
-			# It's weird that user_id is string but id_article is int
-			article_key = ndb.Key('Account', user_id, 'Article', int(id_article))
-			article = article_key.get()
-			if article is None:
-				logging.error('********Error********'+ str(article_key.parent()) + '******Error******')
-				self.response.write('*****************Sorry Couldnt retrieve item************')
+			# if no id is provided, just return a bare writedown for trials
+			if not id_article:
+				self.render('writedown.html')
 			else:	
-				self.render('writedown.html', user_name = user.nickname(), content=article.content)	
-			
+				user_id = user.user_id()
+				# It's weird that user_id is string but id_article is int
+				article_key = ndb.Key('Account', user_id, 'Article', int(id_article))
+				article = article_key.get()
+				if article is None:
+					self.response.write('*****************Sorry Couldnt retrieve item************')
+				else:	
+					self.render('writedown.html', user_name = user.nickname(), content=article.content)	
+				

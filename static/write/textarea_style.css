@@ -12,11 +12,33 @@
 	margin: 0px 5px;	
 }
 
+#writedown-title {
+    margin-bottom: 12px;
+}
+
+#writedown-description {
+  width: 78%;
+  display: inline-block;
+  margin-top: 2px;
+}
+
+#save-button {
+  position: absolute;
+  right: 0;
+  width: 140px;
+  top: 30px;
+  
+}
+
 @media(min-width: 776px) { /* for large devices fix width */
 	.textarea-outer {
 		width: 700px;
 		margin: auto;
 	}
+
+  #writedown-title {
+    width: 700px;
+  }
 }
 
 #draw-area {

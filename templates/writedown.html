@@ -48,7 +48,7 @@
    <div class="row">
     <div class="col-md-9">
          
-
+    <input type="text" class="form-control" id="writedown-title" placeholder="Title">
     <!-- Text Area -->
     <div class="textarea-outer">
       <!-- Important that first child is icon-group and second child is text-area -->
@@ -158,6 +158,10 @@
 
       <div id="clipboard-div">
         <button id="clipboard-btn">Copy HTML to Clipboard</button>
+        {% if user_name %}
+        <textarea class="form-control" id="writedown-description" placeholder="Description"></textarea>
+        <button type="submit" id="save-button" class="btn-xs btn-primary">Save</button>
+        {% endif %}
       </div>
 
       <div id="text-disp-div" class="markdown-body"></div>
