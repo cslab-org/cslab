@@ -4,12 +4,12 @@
 }
 
 /* Each article in a div */
-.article-list-div {
+.each-article-list-div {
 	min-height: 50px;
 	margin-top: 20px;
 }
 
-.article-title{
+.each-article-title{
 	display: inline-block;
 	font-family: Helvetica;
 	font-size: 16px;
@@ -19,18 +19,18 @@
 	cursor: pointer;
 }
 
-.article-sub-lining {
+.each-article-sub-lining {
 	font-size: 12px;
 	font-style: italic;
 }
 
-.article-kind {
+.each-article-kind {
 	display: inline-block;
-	margin-right: 15px;
+	margin-right: 20px;
 	font-weight: bold;
 }
 
-.article-description {
+.each-article-description {
 	font-size: 14px;
 	font-style: italic;
 }

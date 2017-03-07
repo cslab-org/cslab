@@ -14,13 +14,13 @@ $(document).ready(function(){
 			
 			for (var i=0; i<data.length; i++) {
 				var datum = data[i];
-				var one_article = $('<div class="article-list-div">' + 
-					'<div class="article-title">' + datum['title'] + '</div>' + 
-					'<div class="article-sub-lining">' + 
-						'<div class="article-kind">' + datum['kind'] + '</div>' +
+				var one_article = $('<div class="each-article-list-div">' + 
+					'<div class="each-article-title">' + datum['title'] + '</div>' + 
+					'<div class="each-article-sub-lining">' + 
+						'<div class="each-article-kind">' + datum['kind'] + '</div>' +
 						'last edited: ' + datum['lastEdited'] +
 					'</div>' +
-					'<div class="article-description">' + datum['description'] + '</div>' +
+					'<div class="each-article-description">' + datum['description'] + '</div>' +
 					'</div>');
 				one_article.data('id', datum.id);	
 				$('#display-articles').append(one_article);	
@@ -43,8 +43,8 @@ $(document).ready(function(){
 	// Check Availability of links
 	$('#check-avail').on('click', 'a', function() {
 		// Read off the form values
-		var link = $('#article-link').val()
-		var kind = $('#article-kind').val()
+		var link = $('#choose-article-link').val()
+		var kind = $('#choose-article-kind').val()
 		// if link is empty, do nothing
 		if (link) {
 			$.ajax({
