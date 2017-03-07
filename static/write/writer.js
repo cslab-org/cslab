@@ -34,8 +34,7 @@ $(document).ready(function(){
 	
 	
 	// Click on previous article title should lead to writedown page
-	$('#display-articles').on('click', '.article-title', function() {
-		
+	$('#display-articles').on('click', '.each-article-title', function() {	
 		window.location.href = '../writedown?id='+$(this).parent().data('id');
 	});	
 	
@@ -62,6 +61,45 @@ $(document).ready(function(){
 					
 					else {
 						$('#check-avail').find('div').html('<span style="color:red;">Not Available</span>');
+					}
+					
+					// Fade away result after 5s
+					setTimeout(function() {
+						$('#check-avail').find('div').html('');
+					}, 5000)
+				},
+				error: function(e){
+					console.log('Error' + e);
+				}
+			}); 
+		}
+	});
+	
+	
+	// Form Submit for a new article
+	$('#new-article-form').submit(function(e) {
+		// Prevent auto refresh
+		e.preventDefault();
+		var link = $('#choose-article-link').val()
+		var kind = $('#choose-article-kind').val()
+		// if link is empty, do nothing
+		if (link) {
+			$.ajax({
+				url: '/write',
+				type: 'POST',
+				data: {"link":link, "kind":kind},
+				
+				success: function(received_data){
+					var data = JSON.parse(received_data);
+					if (data.result) {
+						// New article successful				
+						$('#check-avail').find('div').html('<span style="color:green;">Link Available</span>');
+						// Forward to writedown
+						window.location.href = '../writedown?id='+data.id;
+					}
+					
+					else {
+						$('#check-avail').find('div').html('<span style="color:red;">Link Not Available</span>');
 					}
 					
 					// Fade away result after 5s

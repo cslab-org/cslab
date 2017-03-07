@@ -72,7 +72,7 @@ class WriteHandler(Handler):
 
 
 	def post(self):
-		
+		# Add a new article
 		user = users.get_current_user()
 		if user is None: 
 			# redirect doesn't work in ajax
@@ -82,11 +82,23 @@ class WriteHandler(Handler):
 			user = users.get_current_user()
 			user_ent_key = ndb.Key(Account, user.user_id())	
 
-			t = datetime.date.today() # datetime.date(2017, 1, 10) 
-			ndb_date = t#.replace(year = int(date[0:4]), month = int(date[5:7]), day = int(date[8:10]))
+			link = str(self.request.get('link'))
+			kind = str(self.request.get('kind'))
 
-			article = Article(parent=user_ent_key, dateCreated=ndb_date, lastEdited=ndb_date, content="**bold** *article*", title="RNN", description="my first project", kind="project", link="rnn")		
-			article.put()
+			if not check_availability(link, kind):
+				# if not available
+				self.response.out.write(json.dumps({"result":False}))
+
+			else:	
+				# if link available
+				t = datetime.date.today() # datetime.date(2017, 1, 10) 
+				ndb_date = t#.replace(year = int(date[0:4]), month = int(date[5:7]), day = int(date[8:10]))
+
+				article = Article(parent=user_ent_key, dateCreated=ndb_date, lastEdited=ndb_date, kind=kind, link=link)		
+				article_key = article.put()
+				article_id = article_key.id()
+
+				self.response.out.write(json.dumps({"result":True, "id":article_id}))
 
 
 
