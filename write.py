@@ -131,10 +131,13 @@ class WriteDownHandler(Handler):
 			
 		else:
 			user_id = user.user_id()
-			user_ent_key = ndb.Key(Account, user_id)
-
-
-			self.render('writedown.html',
-					user_name = user.nickname(), 
-			)	
+			id_article = str(self.request.get('id'))
+			# It's weird that user_id is string but id_article is int
+			article_key = ndb.Key('Account', user_id, 'Article', int(id_article))
+			article = article_key.get()
+			if article is None:
+				logging.error('********Error********'+ str(article_key.parent()) + '******Error******')
+				self.response.write('*****************Sorry Couldnt retrieve item************')
+			else:	
+				self.render('writedown.html', user_name = user.nickname(), content=article.content)	
 			

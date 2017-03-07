@@ -18,6 +18,8 @@ tarea.addEventListener('input', function (evt) {
     re_render();
 });
 
+// Initially a render
+re_render();
 
 // Button click handlers
 icon_group.addEventListener('click', function(event) {
