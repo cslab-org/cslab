@@ -118,6 +118,34 @@ class WriteAjaxHandler(Handler):
 			self.response.out.write(json.dumps(response_data))
 
 
+# True means available
+def check_availability(link, kind):
+	qry = Article.query(ndb.AND(Article.link==link, Article.kind==kind))
+	qry_result = qry.fetch()
+	return False if qry_result else True
+		
+
+
+class WriteCheckAvailability(Handler):
+	# To check whether a link is available
+	def get(self):
+		# make sure the user is logged in
+		user = users.get_current_user()
+		if user is None:
+			# Redirect actually doesn't work in ajax - still... leave it 
+			self.redirect(users.create_login_url(self.request.url))	
+			
+		else:
+			# user is not important. Check availability across all users
+			#user_id = user.user_id()
+			#user_ent_key = ndb.Key(Account, user_id)
+			link = str(self.request.get('link'))
+			kind = str(self.request.get('kind'))
+
+			self.response.out.write(json.dumps({"result": check_availability(link, kind)}))
+			
+
+
 
 # To render the writedown page where we write markdown 
 class WriteDownHandler(Handler):

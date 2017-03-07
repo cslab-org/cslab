@@ -48,16 +48,22 @@
 
 	  <span class="mr-sm-2" for="inlineFormCustomSelect">Kind: </span>
 	  <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="article-kind"  style="margin-right:10px">
-	    <option selected>Blog</option>
-	    <option value="1">Project</option>
-	    <option value="2">Private</option>
+	    <option value="blog" selected>Blog</option>
+	    <option value="project">Project</option>
+	    <option value="private">Private</option>
 	  </select>
 
 	  <button type="submit" class="btn btn-primary">Submit</button>
+
   </form>	
 
+  <div id="check-avail">
+   <a>check availability</a>
+   <div></div>
+  </div>
+
   <!-- List of all articles. Use AJAX to retrieve from the datastore and render in the client side -->
-  <h4 style="margin-top:60px">Previous Articles</h4>
+  <h4 style="margin-top:40px">Previous Articles</h4>
   <div id="display-articles">
 
   </div>

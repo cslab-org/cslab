@@ -79,7 +79,9 @@ app = webapp2.WSGIApplication([
 
     ('/write', WriteHandler),
     ('/writeajax', WriteAjaxHandler),
+    ('/writecheck', WriteCheckAvailability),    
     ('/writedown', WriteDownHandler),
+
 
     ('/login', RegisterUserHandler)
 ], debug=True)

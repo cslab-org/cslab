@@ -10,6 +10,7 @@
 }
 
 .article-title{
+	display: inline-block;
 	font-family: Helvetica;
 	font-size: 16px;
 	opacity: 0.8;
@@ -32,4 +33,20 @@
 .article-description {
 	font-size: 14px;
 	font-style: italic;
+}
+
+#check-avail {
+	margin-top: 12px;
+}
+
+#check-avail a {
+	font-size: 12px;
+	font-family: serif;
+	text-decoration: underline;
+}
+
+#check-avail div {
+	display: inline-block;
+	margin-left: 15px;
+	font-size: 11px;
 }
