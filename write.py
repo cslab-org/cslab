@@ -184,4 +184,37 @@ class WriteDownHandler(Handler):
 					self.response.write('*****************Sorry Couldnt retrieve item************')
 				else:	
 					self.render('writedown.html', user_name = user.nickname(), content=article.content, title=article.title, description=article.description)	
-				
+	
+	# To save an article
+	def post(self):
+		# Save an article
+		user = users.get_current_user()
+		if user is None: 
+			# redirect doesn't work in ajax
+			self.response.out.write(json.dumps({"result":False}))
+
+		else:
+			user = users.get_current_user()
+			user_id = user.user_id()
+
+			article_id = int(self.request.get('id'))
+			title = str(self.request.get('title'))
+			description = str(self.request.get('description'))
+			content = str(self.request.get('content'))
+
+			t = datetime.date.today() # datetime.date(2017, 1, 10) 
+			ndb_date = t#.replace(year = int(date[0:4]), month = int(date[5:7]), day = int(date[8:10]))
+
+			# Create the key of our article with the retreived id
+			article_key = ndb.Key('Account', user_id, 'Article', article_id)
+			article = article_key.get()
+			# update the article
+			article.title = title
+			article.description = description
+			article.content = content
+			article.lastEdited = ndb_date
+			# save the changes
+			article.put()
+
+			self.response.out.write(json.dumps({"result":True}))
+		

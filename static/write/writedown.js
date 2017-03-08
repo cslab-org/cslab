@@ -458,3 +458,49 @@ copy_clipboard_btn.addEventListener('click', function() {
 	
 });
 
+
+// Copy the id of article as soon as the page loads
+var l = window.location.href.indexOf('?id=') + 4;
+var article_id = window.location.href.substr(l)
+// Save button
+document.getElementById('save-button').onclick = function() {
+	// Save only if id is available
+	if (article_id) {
+		// Read off the title, description, content etc.
+		var title = document.getElementById('writedown-title').value;
+		var description = document.getElementById('writedown-description').value;
+		var content = document.getElementById('textarea-div').value;
+		// Ajax Request to save the article
+		var xhr = new XMLHttpRequest();
+		// We are stopping. Set start to 0 - not very important, but for symmetry with the other xhr
+		var params = '/writedown?id='+ article_id +'&title='+title+'&description='+description+'&content='+content;
+		//console.log(params);
+		xhr.open('POST', params);
+		xhr.send();
+		xhr.onreadystatechange = function () {
+			var DONE = 4; // readyState 4 means the request is done.
+			var OK = 200; // status 200 is a successful return.
+			if (xhr.readyState === DONE) {
+				if (xhr.status === OK) {
+					 
+					var response = xhr.responseText;
+					console.log(response);
+					 //var message = "Yesterday's Work of " + total_yh + "h " + total_ym + "m Committed Successfully!";
+					 //show_alert.call(alert_bottom, message, "alert-success");
+
+
+				}
+				else {
+					// started_div.style('color', 'red').text("Server Error - Yesterday's work was not committed!");
+					//var message = "Yesterday's Work of " + total_yh + "h " + total_ym + "m was NOT committed because of server error!";
+					//show_alert.call(alert_bottom, message, "alert-danger");
+					console.log('Error in ajax')
+				}
+
+			}
+		};
+		
+	}
+				
+}
+
