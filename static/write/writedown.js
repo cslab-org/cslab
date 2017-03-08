@@ -467,9 +467,9 @@ document.getElementById('save-button').onclick = function() {
 	// Save only if id is available
 	if (article_id) {
 		// Read off the title, description, content etc.
-		var title = document.getElementById('writedown-title').value;
-		var description = document.getElementById('writedown-description').value;
-		var content = document.getElementById('textarea-div').value;
+		var title = encodeURI(document.getElementById('writedown-title').value);
+		var description = encodeURI(document.getElementById('writedown-description').value);
+		var content = encodeURI(document.getElementById('textarea-div').value);
 		// Ajax Request to save the article
 		var xhr = new XMLHttpRequest();
 		// We are stopping. Set start to 0 - not very important, but for symmetry with the other xhr

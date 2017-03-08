@@ -14,12 +14,14 @@
 
 #writedown-title {
     margin-bottom: 12px;
+    border-color: white;
 }
 
 #writedown-description {
   width: 78%;
   display: inline-block;
   margin-top: 2px;
+  resize: vertical; 
 }
 
 #save-button {
