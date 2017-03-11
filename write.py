@@ -21,11 +21,11 @@ jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),  
 class Article(ndb.Model):
 	# The parent of an Entry is Account
 	dateCreated = ndb.DateProperty()	
-	lastEdited = ndb.DateProperty(indexed = True)
+	lastEdited = ndb.DateProperty(indexed = True) # indexed = True is only useful for changing previous indexed = False
 	content = ndb.TextProperty()
 	title = ndb.StringProperty() # max 500 characters
 	# description is max 500 characters - we won't enforce it but more will cause a write error
-	description = ndb.StringProperty()
+	description = ndb.StringProperty(indexed = False)
 	# kind can be either of "blog", "project" or "private", but not enforcing it
 	kind = ndb.StringProperty()
 	# link is not a key. only keep newton-method in staed of cslab.org/blog/newton-method
@@ -181,7 +181,7 @@ class WriteDownHandler(Handler):
 				article_key = ndb.Key('Account', user_id, 'Article', int(id_article))
 				article = article_key.get()
 				if article is None:
-					self.response.write('*****************Sorry Couldnt retrieve item************')
+					self.response.write('***************** Sorry Couldnt retrieve item ************')
 				else:	
 					self.render('writedown.html', user_name = user.nickname(), content=article.content, title=article.title, description=article.description)	
 	
@@ -209,12 +209,16 @@ class WriteDownHandler(Handler):
 			article_key = ndb.Key('Account', user_id, 'Article', article_id)
 			article = article_key.get()
 			# update the article
-			article.title = title
-			article.description = description
-			article.content = content
-			article.lastEdited = ndb_date
-			# save the changes
-			article.put()
+			if (article):
+				article.title = title
+				article.description = description
+				article.content = content
+				article.lastEdited = ndb_date
+				# save the changes
+				article.put()
 
-			self.response.out.write(json.dumps({"result":True}))
+				self.response.out.write(json.dumps({"result":True}))
+			else:
+				# Failed because provided id doesn't exist
+				self.response.out.write(json.dumps({"result":False}))
 		

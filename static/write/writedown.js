@@ -460,9 +460,10 @@ copy_clipboard_btn.addEventListener('click', function() {
 
 
 // Copy the id of article as soon as the page loads
-var l = window.location.href.indexOf('?id=') + 4;
-var article_id = window.location.href.substr(l)
-// Save button
+var pos_id = window.location.href.indexOf('?id=') + 4;
+var article_id = window.location.href.substr(pos_id)
+var alert_bottom = document.getElementById('alert-bottom');
+// Save button to save the article
 document.getElementById('save-button').onclick = function() {
 	// Save only if id is available
 	if (article_id) {
@@ -483,10 +484,26 @@ document.getElementById('save-button').onclick = function() {
 			if (xhr.readyState === DONE) {
 				if (xhr.status === OK) {
 					 
-					var response = xhr.responseText;
-					console.log(response);
-					 //var message = "Yesterday's Work of " + total_yh + "h " + total_ym + "m Committed Successfully!";
-					 //show_alert.call(alert_bottom, message, "alert-success");
+					var response = JSON.parse(xhr.responseText);
+					console.log(response)
+					if (response.result) {
+						// success
+						alert_bottom.attr('class', 'alert alert-success fade in');
+						alert_bottom.children[1].innerHTML = 'Successfully saved';
+						
+						setTimeout(function() {
+							alert_bottom.attr('class', 'alert alert-success fade');
+						}, 5000)
+					}
+					else {
+						// Failure: User not logged in: It can happen only if signed out user copy a url with id 
+						alert_bottom.setAttribute('class', 'alert alert-success fade in');
+						alert_bottom.children[1].innerHTML = 'Failed to Save';
+						
+						setTimeout(function() {
+							alert_bottom.setAttribute('class', 'alert alert-success fade');
+						}, 5000)
+					}
 
 
 				}
@@ -503,4 +520,5 @@ document.getElementById('save-button').onclick = function() {
 	}
 				
 }
+
 

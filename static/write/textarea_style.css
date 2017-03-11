@@ -24,6 +24,17 @@
   resize: vertical; 
 }
 
+#alert-bottom {
+  font-size: 13px;
+  position: fixed;
+  bottom: 0;
+  margin-bottom: 0 !important;
+  width: 100%;
+  height: 52px;
+  text-align: center;
+  z-index: 999;
+}
+
 #save-button {
   position: absolute;
   right: 0;

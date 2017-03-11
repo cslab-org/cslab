@@ -21,18 +21,18 @@ jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),  
 class Entry(ndb.Model):
 	# The parent of an Entry is Account
 	date = ndb.DateProperty(indexed = True)	
-	hours = ndb.IntegerProperty()
-	mins = ndb.IntegerProperty()
+	hours = ndb.IntegerProperty(indexed = False)
+	mins = ndb.IntegerProperty(indexed = False)
 	notes = ndb.TextProperty()
 
 # Only a single instance of this Entity type is required.
 # Should have found other way! But keeping in client side or in memcache don't seem to be good
 class Work(ndb.Model):
 	active = ndb.BooleanProperty(default = False)
-	starth = ndb.IntegerProperty()
-	startm = ndb.IntegerProperty()
-	totalh = ndb.IntegerProperty()
-	totalm = ndb.IntegerProperty()
+	starth = ndb.IntegerProperty(indexed = False)
+	startm = ndb.IntegerProperty(indexed = False)
+	totalh = ndb.IntegerProperty(indexed = False)
+	totalm = ndb.IntegerProperty(indexed = False)
 	date = ndb.DateProperty()
 
 
