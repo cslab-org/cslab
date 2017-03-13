@@ -107,6 +107,17 @@
     /* border: 1px solid #cccccc; */
 }
 
+#title-disp-div {
+  text-align: center;
+  padding-bottom: 0.3em;
+  font-size: 2em;
+  border-bottom: 1px solid #eee;
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 0.67em 0;
+  box-sizing: border-box;
+}
+
 #textarea-div {
 	resize: none;
 	width: 100%;

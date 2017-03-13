@@ -18,6 +18,11 @@ tarea.addEventListener('input', function (evt) {
     re_render();
 });
 
+// Event listener for title change
+document.getElementById("writedown-title").addEventListener("input", function() {
+    document.getElementById("title-disp-div").textContent = document.getElementById("writedown-title").textContent.trim();
+}, false);
+
 // Initially a render
 re_render();
 
@@ -486,7 +491,7 @@ document.getElementById('save-button').onclick = function() {
 				if (xhr.status === OK) {
 					 
 					var response = JSON.parse(xhr.responseText);
-					console.log(response)
+					// console.log(response)
 					if (response.result) {
 						// success
 						alert_bottom.setAttribute('class', 'alert alert-success fade in');
