@@ -183,6 +183,7 @@ class WriteDownHandler(Handler):
 				if article is None:
 					self.response.write('***************** Sorry Couldnt retrieve item ************')
 				else:	
+					logging.error('***** '+article.title + ' ********')
 					self.render('writedown.html', user_name = user.nickname(), content=article.content, title=article.title, description=article.description)	
 	
 	# To save an article

@@ -463,12 +463,13 @@ copy_clipboard_btn.addEventListener('click', function() {
 var pos_id = window.location.href.indexOf('?id=') + 4;
 var article_id = window.location.href.substr(pos_id)
 var alert_bottom = document.getElementById('alert-bottom');
+
 // Save button to save the article
 document.getElementById('save-button').onclick = function() {
 	// Save only if id is available
 	if (article_id) {
 		// Read off the title, description, content etc.
-		var title = encodeURI(document.getElementById('writedown-title').value);
+		var title = encodeURI(document.getElementById('writedown-title').textContent.trim());
 		var description = encodeURI(document.getElementById('writedown-description').value);
 		var content = encodeURI(document.getElementById('textarea-div').value);
 		// Ajax Request to save the article
@@ -488,11 +489,11 @@ document.getElementById('save-button').onclick = function() {
 					console.log(response)
 					if (response.result) {
 						// success
-						alert_bottom.attr('class', 'alert alert-success fade in');
+						alert_bottom.setAttribute('class', 'alert alert-success fade in');
 						alert_bottom.children[1].innerHTML = 'Successfully saved';
 						
 						setTimeout(function() {
-							alert_bottom.attr('class', 'alert alert-success fade');
+							alert_bottom.setAttribute('class', 'alert alert-success fade');
 						}, 5000)
 					}
 					else {

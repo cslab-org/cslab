@@ -14,7 +14,12 @@
 
 #writedown-title {
     margin-bottom: 12px;
-    border-color: white;
+    /* border-color: white; */
+}
+
+[contenteditable=true]:empty:before{
+  content: attr(placeholder);
+  display: block; /* For Firefox */
 }
 
 #writedown-description {
