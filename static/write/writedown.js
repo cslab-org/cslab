@@ -498,7 +498,7 @@ document.getElementById('save-button').onclick = function() {
 					}
 					else {
 						// Failure: User not logged in: It can happen only if signed out user copy a url with id 
-						alert_bottom.setAttribute('class', 'alert alert-success fade in');
+						alert_bottom.setAttribute('class', 'alert alert-warning fade in');
 						alert_bottom.children[1].innerHTML = 'Failed to Save';
 						
 						setTimeout(function() {
@@ -522,4 +522,9 @@ document.getElementById('save-button').onclick = function() {
 				
 }
 
+
+// fade away the alert when close button is clicked
+document.getElementById('alert-bottom-close').onclick = function() {
+	alert_bottom.setAttribute('class', 'alert alert-success fade');
+}
 
