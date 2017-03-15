@@ -13,23 +13,11 @@ import os
 import jinja2
 
 from account import *
+from model import *
 
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),  autoescape = True)
 
-# Keep the details of articles
-class Article(ndb.Model):
-	# The parent of an Entry is Account
-	dateCreated = ndb.DateProperty()	
-	lastEdited = ndb.DateProperty(indexed = True) # indexed = True is only useful for changing previous indexed = False
-	content = ndb.TextProperty()
-	title = ndb.StringProperty() # max 500 characters
-	# description is max 500 characters - we won't enforce it but more will cause a write error
-	description = ndb.StringProperty(indexed = False)
-	# kind can be either of "blog", "project" or "private", but not enforcing it
-	kind = ndb.StringProperty()
-	# link is not a key. only keep newton-method in staed of cslab.org/blog/newton-method
-	link = ndb.StringProperty(required=True)
 
 class Handler(webapp2.RequestHandler):
 	def write(self, *a, **kw):
@@ -183,7 +171,6 @@ class WriteDownHandler(Handler):
 				if article is None:
 					self.response.write('***************** Sorry Couldnt retrieve item ************')
 				else:	
-					logging.error('***** '+article.title + ' ********')
 					self.render('writedown.html', user_name = user.nickname(), content=article.content, title=article.title, description=article.description)	
 	
 	# To save an article
@@ -202,6 +189,7 @@ class WriteDownHandler(Handler):
 			title = str(self.request.get('title'))
 			description = str(self.request.get('description'))
 			content = str(self.request.get('content'))
+			logging.error(content)
 
 			t = datetime.date.today() # datetime.date(2017, 1, 10) 
 			ndb_date = t#.replace(year = int(date[0:4]), month = int(date[5:7]), day = int(date[8:10]))

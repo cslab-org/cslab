@@ -481,6 +481,7 @@ document.getElementById('save-button').onclick = function() {
 		var xhr = new XMLHttpRequest();
 		// We are stopping. Set start to 0 - not very important, but for symmetry with the other xhr
 		var params = '/writedown?id='+ article_id +'&title='+title+'&description='+description+'&content='+content;
+		console.log(params)
 		//console.log(params);
 		xhr.open('POST', params);
 		xhr.send();

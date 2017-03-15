@@ -4,6 +4,8 @@ import logging
 import os
 import jinja2
 
+from model import *
+
 template_dir = os.path.join(os.path.dirname(__file__), 'blog-articles')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),  autoescape = True)
 
@@ -27,7 +29,15 @@ class BlogHandler(Handler):
 	def get(self, url):
 		#logging.error('\nurl is '+url)
 		if url and url is not '/':
-			self.render(url+'.html')
+			# self.render(link+'.html')
+			# Dynamic pages not static as in earlier version
+			link = url[1:]
+			# Retrieve the article from the datastore
+			qry = Article.query(ndb.AND(Article.link==link, Article.kind=="blog"))
+			qry_result = qry.fetch()
+			article = qry_result[0] # only one, but result is a list
+			self.render('blog-article.html', title=article.title, content=article.content, date=article.dateCreated)
+
 		else:
 			self.render('blog-home.html')		
 		#self.response.out.write(url)
