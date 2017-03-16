@@ -36,6 +36,7 @@ class BlogHandler(Handler):
 			qry = Article.query(ndb.AND(Article.link==link, Article.kind=="blog"))
 			qry_result = qry.fetch()
 			article = qry_result[0] # only one, but result is a list
+			
 			self.render('blog-article.html', title=article.title, content=article.content, date=article.dateCreated)
 
 		else:

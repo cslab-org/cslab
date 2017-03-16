@@ -51,7 +51,7 @@
     </div>  
     
     <div id="content-beauty" class="content-body-body">
-       {{content}}
+       {{ content }}
     </div>   
 
 	</div>
@@ -69,7 +69,8 @@
 <script type="text/javascript">
     // Format the content: convert markdown to html
     var content_area = document.getElementById('content-beauty')
-    var ugly = content_area.innerHTML.trim();
+    var ugly = content_area.innerHTML.trim(); 
+    ugly = ugly.replace(/&lt;&lt;/g,'<<').replace(/&gt;&gt;/g,'>>');
     var beauty = window.marked(ugly);
     content_area.innerHTML = beauty;
     window.renderMathInElement(content_area);
