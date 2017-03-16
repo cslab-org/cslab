@@ -52,7 +52,7 @@ body{
 	font-family: Helvetica;
 	font-size: 36px;
 	opacity: 0.6;
-	margin: 10px 15px;
+	margin: 10px 0px;
 	padding-bottom: 10px;
 	border-bottom: 1px solid rgba(127,127,127, 0.3);
 }
@@ -92,7 +92,7 @@ body{
 }
 
 .content-details {
-	margin-bottom: 10px;
+	margin-bottom: 15px;
 	font-size: 11px;
 	font-style: italic;
 	padding-bottom: 10px;
