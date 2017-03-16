@@ -189,7 +189,7 @@ class WriteDownHandler(Handler):
 			title = str(self.request.get('title'))
 			description = str(self.request.get('description'))
 			content = str(self.request.get('content'))
-			logging.error(content)
+			# logging.error(content)
 
 			t = datetime.date.today() # datetime.date(2017, 1, 10) 
 			ndb_date = t#.replace(year = int(date[0:4]), month = int(date[5:7]), day = int(date[8:10]))

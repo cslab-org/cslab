@@ -476,13 +476,12 @@ document.getElementById('save-button').onclick = function() {
 		// Read off the title, description, content etc.
 		var title = encodeURI(document.getElementById('writedown-title').textContent.trim());
 		var description = encodeURI(document.getElementById('writedown-description').value);
-		var content = encodeURI(document.getElementById('textarea-div').value);
+		var content = encodeURIComponent(document.getElementById('textarea-div').value);
 		// Ajax Request to save the article
 		var xhr = new XMLHttpRequest();
 		// We are stopping. Set start to 0 - not very important, but for symmetry with the other xhr
 		var params = '/writedown?id='+ article_id +'&title='+title+'&description='+description+'&content='+content;
-		console.log(params)
-		//console.log(params);
+		// console.log(params);
 		xhr.open('POST', params);
 		xhr.send();
 		xhr.onreadystatechange = function () {
