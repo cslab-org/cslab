@@ -8,6 +8,8 @@
   
   <link rel="stylesheet" type="text/css" href="/static/bootstrap.css"/>
   <link rel="stylesheet" type="text/css" href="/static/blog/blog_style.css"/>
+  <link rel="stylesheet" type="text/css" href="/static/write/github-markdown.css"/>
+  <link rel="stylesheet" type="text/css" href="/static/write/katex/katex.min.css"/>
   <title>Blog CSLab</title>
 </head>
 
@@ -35,22 +37,22 @@
    <img src="static/blog/machine-banner.png"> 
   </div> -->
 
-  <div class="content-heading">
-	{{title}}
-  </div>
-
-  <div class="content-details">
-        Published on {{date}}
-  </div>	
 
   <div class="content-body">
     <div class="row">
     <div class="col-md-9">
 
+    <div class="content-heading">
+     {{title}}
+    </div>
 
-      <div class="content-body-body">
-	       {{content}}
-      </div>   
+    <div class="content-details">
+          Published on {{date}}
+    </div>  
+    
+    <div id="content-beauty" class="content-body-body">
+       {{content}}
+    </div>   
 
 	</div>
 
@@ -59,6 +61,19 @@
 </div>
 </div>
 </div>
+
+<script type="text/javascript" src="/static/write/marked.js"></script>
+<script type="text/javascript" src="/static/write/katex/katex.min.js"></script>
+<script type="text/javascript" src="/static/write/katex/auto-render.min.js"></script>
+
+<script type="text/javascript">
+    // Format the content: convert markdown to html
+    var content_area = document.getElementById('content-beauty')
+    var ugly = content_area.innerHTML.trim();
+    var beauty = window.marked(ugly);
+    content_area.innerHTML = beauty;
+    window.renderMathInElement(content_area);
+</script>
 
 </body>
 </html>
