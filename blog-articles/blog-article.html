@@ -10,7 +10,20 @@
   <link rel="stylesheet" type="text/css" href="/static/blog/blog_style.css"/>
   <link rel="stylesheet" type="text/css" href="/static/write/github-markdown.css"/>
   <link rel="stylesheet" type="text/css" href="/static/write/katex/katex.min.css"/>
-  <title>Blog CSLab</title>
+
+  <script type="text/javascript">
+  (function () {
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = ('https:' == document.location.protocol ? 'https://s' : 'http://i')
+        + '.po.st/static/v4/post-widget.js#publisherKey=f91rrtnjrrp4aj357mkk';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+   })();
+</script>
+
+<title>Blog CSLab</title>
 </head>
 
 <body>
@@ -54,6 +67,31 @@
        {{ content }}
     </div>   
 
+        <div class="discuss">
+        <h2>Discuss</h2>
+        <div id="disqus_thread"></div>
+          <script>
+          /**
+          * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+          * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+          */
+          /*
+          var disqus_config = function () {
+          this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+          this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+          };
+          */
+          (function() { // DON'T EDIT BELOW THIS LINE
+          var d = document, s = d.createElement('script');
+
+          s.src = '//cslaborg.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+          })();
+          </script>
+          <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+      </div>
 	</div>
 
 	</div>  
@@ -75,6 +113,9 @@
     content_area.innerHTML = beauty;
     window.renderMathInElement(content_area);
 </script>
+
+
+<script id="dsq-count-scr" src="//cslaborg.disqus.com/count.js" async></script>
 
 </body>
 </html>
