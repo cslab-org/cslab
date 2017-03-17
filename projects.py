@@ -1,6 +1,7 @@
 
 import webapp2
 import logging
+from google.appengine.api import users
 import os
 import jinja2
 
@@ -18,7 +19,7 @@ class Handler(webapp2.RequestHandler):
 			return (jinja_env.get_template(template)).render(params)
 		except:
 			# TODO - Be careful about blog/blog-error.html
-			return (jinja_env.get_template('project-error.html')).render()
+			return (jinja_env.get_template('blog-error.html')).render()
 
 	def render(self, template, **html_add_ins):
 		self.write(self.render_str(template, **html_add_ins))
@@ -28,6 +29,14 @@ class Handler(webapp2.RequestHandler):
 class ProjectsHandler(Handler):
 	def get(self, url):
 		#logging.error('\nurl is '+url)
+		user = users.get_current_user()
+		logout = ''
+		if user:
+			user_id = user.user_id()
+			nickname = user.nickname()
+			email = user.email()
+			logout = users.create_logout_url('/')
+
 		if url and url is not '/':
 			# self.render(link+'.html')
 			# Dynamic pages not static as in earlier version
@@ -40,7 +49,7 @@ class ProjectsHandler(Handler):
 			# format date properly
 			date = article.dateCreated.strftime('%d %b %Y')
 
-			self.render('blog-article.html', title=article.title, content=article.content, date=date, kind="Projects")
+			self.render('blog-article.html', title=article.title, content=article.content, date=date, kind="Projects", logout_url=logout)
 
 		else:
 			# retrieve the list of all blog articles and render
@@ -55,6 +64,6 @@ class ProjectsHandler(Handler):
 				# Add a date field which is in proper format
 				for a in qry_result:
 					a.date = a.dateCreated.strftime('%d %b %Y')
-				self.render('blog-home.html', articles=qry_result, kind="projects")		
+				self.render('blog-home.html', articles=qry_result, kind="projects", logout_url=logout)		
 
 

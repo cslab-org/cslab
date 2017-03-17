@@ -3,7 +3,7 @@
 <head>
   <link rel="stylesheet" type="text/css" href="/static/bootstrap.css"/>
   <link rel="stylesheet" type="text/css" href="/static/blog/blog_home.css"/>
-  <title>ML Blog</title>
+  <title>CSLab {{kind}}</title>
 </head>
 
 <body>
@@ -15,6 +15,10 @@
 			  CS_Lab
 			</a>
 		</div>
+
+		<div class="navbar-right" style="padding: 15px 0px;">
+		  {% if logout_url %} <a href="{{logout_url}}">Logout</a> {% endif %}
+		</div>
 	</div>
   </div>
 
@@ -22,7 +26,7 @@
 <div class="row">
 <div class="col-md-8 col-md-push-2"> 
   <div class="articles-info">
-    Blog Articles
+    {{kind}} Articles
   </div>
   {% for a in articles %}
   	<div class="article-list">

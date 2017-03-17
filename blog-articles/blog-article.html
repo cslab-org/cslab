@@ -23,7 +23,7 @@
    })();
 </script>
 
-<title>{{kind}} CSLab</title>
+<title>CSLab {{kind}}</title>
 </head>
 
 <body>
@@ -35,6 +35,11 @@
 			  CS_Lab
 			</a>		
 		</div>
+
+    <div class="navbar-right" style="padding: 15px 0px;">
+      {% if logout_url %} <a href="{{logout_url}}">Logout</a> {% endif %}
+    </div>
+        
 	</div>
   </div>
 

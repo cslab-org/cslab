@@ -2,6 +2,7 @@
 import webapp2
 import logging
 import os
+from google.appengine.api import users
 import jinja2
 import traceback
 
@@ -29,6 +30,14 @@ class Handler(webapp2.RequestHandler):
 class BlogHandler(Handler):
 	def get(self, url):
 		#logging.error('\nurl is '+url)
+		user = users.get_current_user()
+		logout = ''
+		if user:
+			user_id = user.user_id()
+			nickname = user.nickname()
+			email = user.email()
+			logout = users.create_logout_url('/')
+
 		if url and url is not '/':
 			# self.render(link+'.html')
 			# Dynamic pages not static as in earlier version
@@ -46,7 +55,7 @@ class BlogHandler(Handler):
 				# format date properly
 				date = article.dateCreated.strftime('%d %b %Y')
 
-				self.render('blog-article.html', title=article.title, content=article.content, date=date, kind="Blog")
+				self.render('blog-article.html', title=article.title, content=article.content, date=date, kind="Blog", logout_url=logout)
 
 		else:
 			# retrieve the list of all blog articles and render
@@ -57,7 +66,7 @@ class BlogHandler(Handler):
 			# Add a date field which is in proper format
 			for a in qry_result:
 				a.date = a.dateCreated.strftime('%d %b %Y')
-			self.render('blog-home.html', articles=qry_result, kind="blog")		
+			self.render('blog-home.html', articles=qry_result, kind="blog", logout_url=logout)		
 		#self.response.out.write(url)
 
 

@@ -5,7 +5,7 @@ a:hover{
 }
 
 body{
-  font-family: Apple SD Gothic Neo,-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family:  "Palatino Linotype", garamond, serif;
   font-size: 16px;
   background-color: white; /* #fcfcfc */
 }
@@ -30,12 +30,14 @@ body{
   padding: 15px 5px;
   font-size: 24px;
   font-weight: 400;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
   border-bottom: 1px solid rgba(210,210,210,0.8);
+  text-transform: capitalize;
 }
 
 .article-list {
   padding: 15px 5px;
+  font-family: Apple SD Gothic Neo,-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 .article-list-date {
