@@ -152,15 +152,15 @@ icon_group.addEventListener('click', function(event) {
 				
 			case 'center':
 				// Check to un-center
-				if (start >=2 && content.slice(start-2, start)==='<<' && content.slice(end, end+2)==='>>') {
-					tarea.value = content.substring(0, start-2) + selected_text + content.substring(end+2);
-					tarea.selectionStart = start - 2;
-					tarea.selectionEnd = start + selected_text.length - 2;
+				if (start >=3 && content.slice(start-3, start)==='<< ' && content.slice(end, end+3)===' >>') {
+					tarea.value = content.substring(0, start-3) + selected_text + content.substring(end+3);
+					tarea.selectionStart = start - 3;
+					tarea.selectionEnd = start + selected_text.length - 3;
 				}
 				else {	
-					tarea.value = content.substring(0, start) + '<<'+ selected_text + '>>' + content.substring(end);
-					tarea.selectionStart = start + 2;
-					tarea.selectionEnd = start + selected_text.length + 2;
+					tarea.value = content.substring(0, start) + '<< '+ selected_text + ' >>' + content.substring(end);
+					tarea.selectionStart = start + 3;
+					tarea.selectionEnd = start + selected_text.length + 3;
 				}
 				
 				break;	

@@ -11,7 +11,7 @@ from account import *
 from model import *
 
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
-jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),  autoescape = True)
+jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),  autoescape = False)
 
 class Handler(webapp2.RequestHandler):
 	def write(self, *a, **kw):
@@ -54,7 +54,7 @@ class PrivateHandler(Handler):
 					# format date properly
 					date = article.dateCreated.strftime('%d %b %Y')
 
-					self.render('blog-article.html', title=article.title, content=article.content, date=date, kind="Reminders")
+					self.render('blog-article.html', title=article.title, content=article.content, date=date, kind="Reminders", logout_url=logout)
 
 				else:
 					# retrieve the list of all blog articles and render
@@ -69,7 +69,7 @@ class PrivateHandler(Handler):
 						# Add a date field which is in proper format
 						for a in qry_result:
 							a.date = a.dateCreated.strftime('%d %b %Y')
-						self.render('blog-home.html', articles=qry_result, kind="private")	# this is for the link /private/link	
+						self.render('blog-home.html', articles=qry_result, kind="private", logout_url=logout)	# this is for the link /private/link	
 
 
 
