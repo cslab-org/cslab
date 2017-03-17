@@ -169,7 +169,7 @@ class WriteDownHandler(Handler):
 				article_key = ndb.Key('Account', user_id, 'Article', int(id_article))
 				article = article_key.get()
 				if article is None:
-					self.response.write('***************** Sorry Couldnt retrieve item ************')
+					self.response.write('***************** Sorry Could not retrieve the article ************')
 				else:	
 					self.render('writedown.html', user_name = user.nickname(), content=article.content, title=article.title, description=article.description)	
 	

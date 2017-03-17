@@ -11,6 +11,12 @@ indexes:
 # your application using appcfg.py.
 
 - kind: Article
+  properties:
+  - name: kind
+  - name: lastEdited
+    direction: desc
+
+- kind: Article
   ancestor: yes
   properties:
   - name: lastEdited

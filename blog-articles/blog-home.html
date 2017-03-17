@@ -2,7 +2,7 @@
 
 <head>
   <link rel="stylesheet" type="text/css" href="/static/bootstrap.css"/>
-  <link rel="stylesheet" type="text/css" href="/static/blog/blog_style.css"/>
+  <link rel="stylesheet" type="text/css" href="/static/blog/blog_home.css"/>
   <title>ML Blog</title>
 </head>
 
@@ -10,17 +10,40 @@
   <div class="navbar navbar-default">
 	<div class="container">	
 		<div class="navbar-header">
-			<a class="navbar-brand" href="kerala.html">
-			  <img alt="Brand" src="/static/blog/gauss.png">
+			<a class="navbar-brand" href="/">
+			  <img alt="Brand" src="/static/logo.png">
 			  CS_Lab
 			</a>
-			
 		</div>
-		
-
 	</div>
   </div>
 
+<div class="container">
+<div class="row">
+<div class="col-md-8 col-md-push-2"> 
+  <div class="articles-info">
+    Blog Articles
+  </div>
+  {% for a in articles %}
+  	<div class="article-list">
+  	<a href=/blog/{{a.link}}>
+  	  <div class="article-list-date">
+  	    {{a.date}}
+  	   </div>
+
+  	   <div class="article-list-title">
+  	     {{a.title}}
+  	   </div>
+
+  	   <div class="article-list-desc">
+  	   	 {{a.description}}
+  	   </div>
+  	</a>   
+  	</div>	
+  {% endfor %}
+</div>
+</div>
+</div>  
 
 </body>
 </html>

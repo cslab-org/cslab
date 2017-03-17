@@ -3,6 +3,7 @@ import webapp2
 import logging
 import os
 import jinja2
+import traceback
 
 from model import *
 
@@ -17,7 +18,7 @@ class Handler(webapp2.RequestHandler):
 		try:
 			return (jinja_env.get_template(template)).render(params)
 		except:
-			# TODO - Be careful about blog/blog-error.html
+			logging.error(traceback.format_exc())
 			return (jinja_env.get_template('blog-error.html')).render()
 
 	def render(self, template, **html_add_ins):
@@ -43,5 +44,16 @@ class BlogHandler(Handler):
 			self.render('blog-article.html', title=article.title, content=article.content, date=date)
 
 		else:
-			self.render('blog-home.html')		
+			# retrieve the list of all blog articles and render
+			# TODO - pagination with 20 blog articles at a time
+			qry = Article.query(Article.kind=="blog").order(-Article.lastEdited)
+			qry_result = qry.fetch()
+
+			# Add a date field which is in proper format
+			for a in qry_result:
+				a.date = a.dateCreated.strftime('%d %b %Y')
+			self.render('blog-home.html', articles=qry_result)		
 		#self.response.out.write(url)
+
+
+
