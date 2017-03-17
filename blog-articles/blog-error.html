@@ -30,8 +30,12 @@
    <img src="static/blog/machine-banner.png"> 
   </div> -->
 
-  <div class="content-heading">
-	Sorry! The page dosn't exist
+  <div class="error-message">
+    {% if message %} 
+    	{{message}}
+    {% else %}
+		Sorry! Failed to Render the page
+	{% endif %}
   </div>	
   
 </div>

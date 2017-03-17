@@ -36,12 +36,17 @@ class BlogHandler(Handler):
 			# Retrieve the article from the datastore
 			qry = Article.query(ndb.AND(Article.link==link, Article.kind=="blog"))
 			qry_result = qry.fetch()
-			article = qry_result[0] # only one, but result is a list
 
-			# format date properly
-			date = article.dateCreated.strftime('%d %b %Y')
+			# if qry_result is empty
+			if (len(qry_result) == 0):
+				self.render('blog-error.html', message="Sorry! The page doesn't exist")
+			else:	
+				article = qry_result[0] # only one, but result is a list
 
-			self.render('blog-article.html', title=article.title, content=article.content, date=date)
+				# format date properly
+				date = article.dateCreated.strftime('%d %b %Y')
+
+				self.render('blog-article.html', title=article.title, content=article.content, date=date, kind="Blog")
 
 		else:
 			# retrieve the list of all blog articles and render
@@ -52,7 +57,7 @@ class BlogHandler(Handler):
 			# Add a date field which is in proper format
 			for a in qry_result:
 				a.date = a.dateCreated.strftime('%d %b %Y')
-			self.render('blog-home.html', articles=qry_result)		
+			self.render('blog-home.html', articles=qry_result, kind="blog")		
 		#self.response.out.write(url)
 
 

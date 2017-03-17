@@ -4,7 +4,9 @@ import logging
 import os
 import jinja2
 
-template_dir = os.path.join(os.path.dirname(__file__), 'project-articles')
+from model import *
+
+template_dir = os.path.join(os.path.dirname(__file__), 'blog-articles')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),  autoescape = True)
 
 class Handler(webapp2.RequestHandler):
@@ -27,7 +29,32 @@ class ProjectsHandler(Handler):
 	def get(self, url):
 		#logging.error('\nurl is '+url)
 		if url and url is not '/':
-			self.render(url+'.html')
+			# self.render(link+'.html')
+			# Dynamic pages not static as in earlier version
+			link = url[1:]
+			# Retrieve the article from the datastore
+			qry = Article.query(ndb.AND(Article.link==link, Article.kind=="project"))
+			qry_result = qry.fetch()
+			article = qry_result[0] # only one, but result is a list
+
+			# format date properly
+			date = article.dateCreated.strftime('%d %b %Y')
+
+			self.render('blog-article.html', title=article.title, content=article.content, date=date, kind="Projects")
+
 		else:
-			self.render('projects-home.html')		
-		#self.response.out.write(url)
+			# retrieve the list of all blog articles and render
+			# TODO - pagination with 20 blog articles at a time
+			qry = Article.query(Article.kind=="project").order(-Article.lastEdited)
+			qry_result = qry.fetch()
+
+			# if qry_result is empty
+			if (len(qry_result) == 0):
+				self.render('blog-error.html', message="Sorry! The page doesn't exist")
+			else:	
+				# Add a date field which is in proper format
+				for a in qry_result:
+					a.date = a.dateCreated.strftime('%d %b %Y')
+				self.render('blog-home.html', articles=qry_result, kind="projects")		
+
+

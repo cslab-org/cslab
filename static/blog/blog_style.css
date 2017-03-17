@@ -57,6 +57,15 @@ body{
 	border-bottom: 1px solid rgba(127,127,127, 0.3);
 }
 
+.error-message {
+	font-family: Helvetica;
+	font-size: 20px;
+	opacity: 0.6;
+	margin: 10px 0px;
+	padding-bottom: 10px;
+}
+
+
 .content-author {
     font-family:  "Palatino Linotype", garamond, serif; /*georgia*/
 	width: 100%;
