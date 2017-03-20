@@ -35,6 +35,7 @@ class PrivateHandler(Handler):
 		user = users.get_current_user()
 		if user:
 			user_id = user.user_id()
+			user_ent_key = ndb.Key(Account, user_id)
 			nickname = user.nickname()
 			email = user.email()
 			logout = users.create_logout_url('/')
@@ -47,35 +48,38 @@ class PrivateHandler(Handler):
 					# Dynamic pages not static as in earlier version
 					link = url[1:]
 					# Retrieve the article from the datastore
-					qry = Article.query(ndb.AND(Article.link==link, Article.kind=="private"))
-					qry_result = qry.fetch()
-					article = qry_result[0] # only one, but result is a list
-
-					# format date properly
-					date = article.dateCreated.strftime('%d %b %Y')
-
-					self.render('blog-article.html', title=article.title, content=article.content, date=date, kind="Reminders", logout_url=logout)
-
-				else:
-					# retrieve the list of all blog articles and render
-					# TODO - pagination with 20 blog articles at a time
-					qry = Article.query(Article.kind=="private").order(-Article.lastEdited)
-					qry_result = qry.fetch()
-
+					qry = Article.query(ndb.AND(Article.link==link, Article.kind=="private"), ancestor=user_ent_key)
+					qry_result = qry.fetch()				
 					# if qry_result is empty
 					if (len(qry_result) == 0):
 						self.render('blog-error.html', message="Sorry! The page doesn't exist")
 					else:	
-						# Add a date field which is in proper format
-						for a in qry_result:
-							a.date = a.dateCreated.strftime('%d %b %Y')
-						self.render('blog-home.html', articles=qry_result, kind="private", logout_url=logout)	# this is for the link /private/link	
+						article = qry_result[0] # only one, but result is a list
+						# format date properly
+						date = article.dateCreated.strftime('%d %b %Y')
+
+						self.render('blog-article.html', title=article.title, content=article.content, date=date, kind="Reminders", logout_url=logout)
+
+				else:
+					# retrieve the list of all blog articles and render
+					# TODO - pagination with 20 blog articles at a time
+					qry = Article.query(Article.kind=="private",  ancestor=user_ent_key).order(-Article.lastEdited)
+					qry_result = qry.fetch()
+
+					kind = "private"
+					# if qry_result is empty
+					if (len(qry_result) == 0):
+						kind = "no"
+					# Add a date field which is in proper format
+					for a in qry_result:
+						a.date = a.dateCreated.strftime('%d %b %Y')
+					self.render('blog-home.html', articles=qry_result, kind=kind, logout_url=logout)	# this is for the link /private/link	
 
 
 
 			# if not an approved user
 			else:
-				self.write('blog-error.html', message='Access Denied! Contact Admin')	
+				self.render('blog-error.html', message='Sorry! Access Denied! Contact Admin', logout_url=logout)	
 
 		# logging in is mandatory
 		else:

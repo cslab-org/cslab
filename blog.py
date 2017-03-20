@@ -51,7 +51,6 @@ class BlogHandler(Handler):
 				self.render('blog-error.html', message="Sorry! The page doesn't exist")
 			else:	
 				article = qry_result[0] # only one, but result is a list
-
 				# format date properly
 				date = article.dateCreated.strftime('%d %b %Y')
 
@@ -63,10 +62,13 @@ class BlogHandler(Handler):
 			qry = Article.query(Article.kind=="blog").order(-Article.lastEdited)
 			qry_result = qry.fetch()
 
+			kind = "blog"
+			if (len(qry_result) == 0):
+				kind = "no"
 			# Add a date field which is in proper format
 			for a in qry_result:
 				a.date = a.dateCreated.strftime('%d %b %Y')
-			self.render('blog-home.html', articles=qry_result, kind="blog", logout_url=logout)		
+			self.render('blog-home.html', articles=qry_result, kind=kind, logout_url=logout)		
 		#self.response.out.write(url)
 
 

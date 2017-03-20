@@ -19,5 +19,12 @@ indexes:
 - kind: Article
   ancestor: yes
   properties:
+  - name: kind
+  - name: lastEdited
+    direction: desc
+
+- kind: Article
+  ancestor: yes
+  properties:
   - name: lastEdited
     direction: desc
