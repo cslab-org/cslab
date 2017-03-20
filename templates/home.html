@@ -20,8 +20,19 @@
 			  <img alt="Brand" src="/static/logo.png">
 			  CS_Lab
 			</a>
-			
 		</div>
+
+
+	    <ul class="nav navbar-nav navbar-right">
+	        <li><a href="/blog">Blog</a></li>
+	        <li><a href="/projects">Projects</a></li>
+	        {% if logout_url %}
+	        <li><a href="/private">Reminders</a></li>
+	        <li><a href="/write">Write</a></li>
+	        <li><a href="{{logout_url}}">Logout</a></li>
+	        {% endif %}
+	    </ul>    
+
 		
 
 	</div>
@@ -35,8 +46,15 @@
 
 <h1> CS Laboratory</h1>
 
+<h3 style="margin-left:23px;">Projects</h3>
 <ul>
-<li><a href="/teaching/dm">Data Mining, Monsoon Semester 2016</a></li>
+<li><a href="/browpad">Browpad</a>: A paint application in browser</li>
+<li><a href="/writedown">Writedown</a>: Markdown to HTML converter</li>
+<li><a href="/timer">Phd-timer</a>: Log working hours</li>
+</ul>
+
+<h3 style="margin-left:23px;">Past Teaching</h3>
+<ul>
 <li><a href="/teaching/dbms">Data Base Management Systems, Monsoon Semester 2016</a></li>
 <li><a href="/teaching/pattern">Pattern Recognition Winter 2016</a></li>
 <li><a href="/teaching/nlp">Natural Language Processing Winter 2016</a></li>

@@ -5,6 +5,7 @@
 import webapp2
 import os
 import jinja2
+from google.appengine.api import users
 
 from timer import *
 from blog import *
@@ -55,7 +56,16 @@ class RegisterUserHandler(webapp2.RequestHandler):
 
 class MainHandler(Handler):
     def get(self):
-        self.render('home.html')
+		user = users.get_current_user()
+		logout = ''
+		if user:
+			user_id = user.user_id()
+			nickname = user.nickname()
+			email = user.email()
+			logout = users.create_logout_url('/')
+
+		self.render('home.html', logout_url=logout)
+
 
 class BrowHandler(Handler):
 	def get(self):
