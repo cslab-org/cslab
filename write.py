@@ -165,13 +165,14 @@ class WriteDownHandler(Handler):
 				self.render('writedown.html')
 			else:	
 				user_id = user.user_id()
+				logout = users.create_logout_url('/')
 				# It's weird that user_id is string but id_article is int
 				article_key = ndb.Key('Account', user_id, 'Article', int(id_article))
 				article = article_key.get()
 				if article is None:
-					self.response.write('***************** Sorry Could not retrieve the article ************')
+					self.render('blog-error.html', message="Sorry! The article doesn't exist")
 				else:	
-					self.render('writedown.html', user_name = user.nickname(), content=article.content, title=article.title, description=article.description)	
+					self.render('writedown.html', user_name = user.nickname(), content=article.content, title=article.title, description=article.description, logout_url=logout)	
 	
 	# To save an article
 	def post(self):
