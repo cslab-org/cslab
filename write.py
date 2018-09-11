@@ -188,8 +188,8 @@ class WriteDownHandler(Handler):
 			user_id = user.user_id()
 
 			article_id = int(self.request.get('id'))
-			title = str(self.request.get('title'))
-			description = str(self.request.get('description'))
+			title = self.request.get('title').encode('utf-8')
+			description = self.request.get('description').encode('utf-8')
 			content = self.request.get('content').encode('utf-8')
 			# logging.error(content)
 
