@@ -183,13 +183,14 @@ class WriteDownHandler(Handler):
 			self.response.out.write(json.dumps({"result":False}))
 
 		else:
+			# logging.error('\n***************************\nYes. Reached the Backend\n****************************\n')
 			user = users.get_current_user()
 			user_id = user.user_id()
 
 			article_id = int(self.request.get('id'))
 			title = str(self.request.get('title'))
 			description = str(self.request.get('description'))
-			content = str(self.request.get('content'))
+			content = self.request.get('content').encode('utf-8')
 			# logging.error(content)
 
 			t = datetime.date.today() # datetime.date(2017, 1, 10) 
