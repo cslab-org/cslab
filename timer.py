@@ -25,8 +25,8 @@ class Entry(ndb.Model):
 	mins = ndb.IntegerProperty(indexed = False)
 	notes = ndb.TextProperty()
 
-# Only a single instance of this Entity type is required.
-# Should have found other way! But keeping in client side or in memcache don't seem to be good
+# Only a single instance of this Entity type is required. update (12/09/2018): Keep separate Work for each user
+# Should have found other way! But keeping in client side or in memcache doesn't seem to be good
 class Work(ndb.Model):
 	active = ndb.BooleanProperty(default = False)
 	starth = ndb.IntegerProperty(indexed = False)
@@ -110,7 +110,7 @@ class TimerHandler(Handler):
 			# When paused active will be made false
 			if (not active):
 				# Check if an entry corresponding to the date already exists!
-				qry = Entry.query(Entry.date == ndb_date)
+				qry = Entry.query(ancestor=user_ent_key).filter(Entry.date == ndb_date)
 				qry_result = qry.fetch()
 				# qry_result is [] if new date
 				if (not qry_result):
@@ -182,7 +182,7 @@ class TimerAjaxHandler(Handler):
 			# Update a previous day's entry
 			
 			# Check if an entry corresponding to the date already exists!
-			qry = Entry.query(Entry.date == ndb_date)
+			qry = Entry.query(ancestor=user_ent_key).filter(Entry.date == ndb_date)
 			qry_result = qry.fetch()
 			# qry_result is [] if new date
 			if (not qry_result):
@@ -219,7 +219,7 @@ class TimerDataHandler(Handler):
 								 month = int(edate[5:7]),
 								 day = int(edate[8:10]))
 
-			qry = Entry.query(ndb.AND(Entry.date >= ndb_sdate, Entry.date <= ndb_edate))
+			qry = Entry.query(ancestor=user_ent_key).filter(ndb.AND(Entry.date >= ndb_sdate, Entry.date <= ndb_edate))
 			qry_result = qry.fetch()
 
 			# we need to serialize the dates

@@ -28,3 +28,8 @@ indexes:
   properties:
   - name: lastEdited
     direction: desc
+
+- kind: Entry
+  ancestor: yes
+  properties:
+  - name: date
