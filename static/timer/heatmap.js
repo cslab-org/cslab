@@ -52,7 +52,8 @@ window.onload = function() {
 	var curent_div = d3.select('#current-div');			  
 	var total_div = d3.select('#total-div'); // BE_CAREFUL - HTML may change
 	var date_div = d3.select('#date-div'); // .select('div'); // BE_CAREFUL - HTML may change
-	var ic_play = d3.select('.play');	
+	// var ic_play = d3.select('.play');	
+	var ic_play = d3.select('#play-button')
 	
 	
 	// This is timer running only for Testing
@@ -671,9 +672,26 @@ window.onload = function() {
 	  };	// End of Ajax request for 1 year worth of entry data  
 	  
 	
+	  // Keyboard Shortcuts: Space bar to play/pause the timer & 'i' to show year-total
+	  document.body.onkeyup = function(e){
+		  
+		if(e.keyCode == 73 || e.key === 'i'){
+			//fire click even
+			document.getElementById('year-total-button').click()
+		}
+		  
+		if(e.keyCode == 32 || e.key === ' '){
+			//fire click event
+			// ic_play.click()
+			// console.log('space bar pressed!')
+			document.getElementById('play-button').click()
+		}
+		  
+	  }	
+	
 	  // Show total of last year upon click
 	  d3.select('#year-total-button').on('click', function() {
-		  console.log('clicked')
+		  // console.log('clicked')
 		// Compute total in the chartData
 		var totalCount = 0;
 		for (var i=0; i<chartData.length; i++) {
