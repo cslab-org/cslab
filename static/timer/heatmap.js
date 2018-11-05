@@ -622,7 +622,7 @@ window.onload = function() {
 				  // var start_date = response.date;  
 				  
 				  var today_end = moment().endOf('day').toDate(); // similar to new Date() 
-	  			  var yearAgo = moment().startOf('day').subtract(1, 'year').toDate();
+	  			  var yearAgo = moment().startOf('day').subtract(1, 'year').add(1, 'day').toDate();
 				  
 				  // Set up the data
 				  chartData = d3.time.days(yearAgo, today_end).map(function (dateElement) {
@@ -762,7 +762,7 @@ function calendarHeatmap() {
   var SQUARE_PADDING = 2;
   var MONTH_LABEL_PADDING = 6;
   var now = moment().endOf('day').toDate();
-  var yearAgo = moment().startOf('day').subtract(1, 'year').toDate();
+  var yearAgo = moment().startOf('day').subtract(1, 'year').add(1, 'day').toDate();
   var data = [];
   var colorRange = ['#D8E6E7', '#218380'];
   var tooltipEnabled = true;
